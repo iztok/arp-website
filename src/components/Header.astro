@@ -34,13 +34,28 @@ const navLinks = [
       <a href="/contact" class="btn btn--primary header__btn">Talk to Sales</a>
     </div>
 
-    <button class="header__mobile-toggle" aria-label="Toggle menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <button class="header__mobile-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="header__mobile-icon header__mobile-icon--menu" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="6" x2="21" y2="6"/>
         <line x1="3" y1="12" x2="21" y2="12"/>
         <line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
+      <svg class="header__mobile-icon header__mobile-icon--close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="6" y1="6" x2="18" y2="18"/>
+        <line x1="6" y1="18" x2="18" y2="6"/>
+      </svg>
     </button>
+  </div>
+
+  <div id="mobile-menu" class="header__mobile-menu" aria-hidden="true">
+    <nav class="header__mobile-nav">
+      {navLinks.map((link) => (
+        <a href={link.href} class="header__mobile-nav-link">{link.label}</a>
+      ))}
+    </nav>
+    <div class="header__mobile-actions">
+      <a href="/contact" class="btn btn--primary header__mobile-btn">Talk to Sales</a>
+    </div>
   </div>
 </header>
 
@@ -144,6 +159,68 @@ const navLinks = [
     padding: var(--spacing-2);
   }
 
+  .header__mobile-icon--close {
+    display: none;
+  }
+
+  .header__mobile-toggle[aria-expanded="true"] .header__mobile-icon--menu {
+    display: none;
+  }
+
+  .header__mobile-toggle[aria-expanded="true"] .header__mobile-icon--close {
+    display: block;
+  }
+
+  .header__mobile-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(10, 10, 10, 0.98);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-6);
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  .header__mobile-menu[aria-hidden="false"] {
+    display: flex;
+  }
+
+  .header__mobile-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .header__mobile-nav-link {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    padding: var(--spacing-2) 0;
+    transition: color var(--transition-fast);
+  }
+
+  .header__mobile-nav-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .header__mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    padding-top: var(--spacing-4);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .header__mobile-btn {
+    text-align: center;
+    width: 100%;
+  }
+
   @media (max-width: 1024px) {
     .header__nav {
       display: none;
@@ -170,6 +247,27 @@ const navLinks = [
       } else {
         header.classList.remove('scrolled');
       }
+    });
+  }
+
+  // Mobile menu toggle
+  const mobileToggle = document.querySelector('.header__mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileToggle && mobileMenu) {
+    mobileToggle.addEventListener('click', () => {
+      const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+      mobileToggle.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu.setAttribute('aria-hidden', String(isExpanded));
+    });
+
+    // Close menu when clicking on a link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
     });
   }
 </script>
