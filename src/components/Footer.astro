@@ -111,9 +111,9 @@ const currentYear = new Date().getFullYear();
     <div class="footer__bottom">
       <div class="footer__logo">
         <svg width="40" height="40" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="32" height="32" rx="8" fill="currentColor"/>
-          <path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" stroke="var(--color-bg-primary)" stroke-width="2" fill="none"/>
-          <circle cx="16" cy="16" r="3" fill="var(--color-bg-primary)"/>
+          <rect width="32" height="32" rx="8" fill="var(--color-flame-red)"/>
+          <path d="M8 12L16 8L24 12V20L16 24L8 20V12Z" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+          <circle cx="16" cy="16" r="3" fill="#FFFFFF"/>
         </svg>
         <span class="footer__logo-text">AgileRP</span>
       </div>
@@ -131,8 +131,8 @@ const currentYear = new Date().getFullYear();
 
 <style>
   .footer {
-    background-color: var(--color-bg-primary);
-    border-top: 1px solid var(--color-border);
+    background-color: var(--color-black-petrol);
+    border-top: none;
     padding: var(--spacing-16) 0 var(--spacing-8);
   }
 
@@ -147,7 +147,7 @@ const currentYear = new Date().getFullYear();
     grid-template-columns: 3fr 1fr;
     gap: var(--spacing-16);
     padding-bottom: var(--spacing-12);
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .footer__columns {
@@ -161,7 +161,7 @@ const currentYear = new Date().getFullYear();
     font-weight: var(--font-weight-semibold);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.5);
     margin-bottom: var(--spacing-4);
   }
 
@@ -174,13 +174,13 @@ const currentYear = new Date().getFullYear();
 
   .footer__link {
     font-size: var(--font-size-sm);
-    color: var(--color-text-primary);
+    color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
   .footer__link:hover {
-    color: var(--color-accent);
+    color: var(--color-flame-red);
   }
 
   .footer__cta-column {
@@ -201,12 +201,12 @@ const currentYear = new Date().getFullYear();
   }
 
   .footer__social-link {
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.5);
     transition: color var(--transition-fast);
   }
 
   .footer__social-link:hover {
-    color: var(--color-text-primary);
+    color: #FFFFFF;
   }
 
   .footer__legal-links {
@@ -218,13 +218,13 @@ const currentYear = new Date().getFullYear();
 
   .footer__legal-link {
     font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
     transition: color var(--transition-fast);
   }
 
   .footer__legal-link:hover {
-    color: var(--color-text-secondary);
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .footer__bottom {
@@ -240,7 +240,7 @@ const currentYear = new Date().getFullYear();
     display: flex;
     align-items: center;
     gap: var(--spacing-3);
-    color: var(--color-text-primary);
+    color: #FFFFFF;
   }
 
   .footer__logo-text {
@@ -250,12 +250,12 @@ const currentYear = new Date().getFullYear();
 
   .footer__copyright {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.5);
   }
 
   .footer__location {
     font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    color: rgba(255, 255, 255, 0.5);
     display: flex;
     align-items: center;
     gap: var(--spacing-2);

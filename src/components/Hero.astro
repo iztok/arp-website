@@ -25,7 +25,9 @@ const {
 } = Astro.props;
 ---
 
-<section class="hero">
+<section class="hero noise-bg">
+  <div class="hero__gradient-orb hero__gradient-orb--1" aria-hidden="true"></div>
+  <div class="hero__gradient-orb hero__gradient-orb--2" aria-hidden="true"></div>
   <div class="hero__bg-lines" aria-hidden="true">
     {Array.from({ length: 8 }).map((_, i) => (
       <div class="hero__bg-line" />
@@ -90,6 +92,31 @@ const {
     justify-content: center;
     padding: var(--spacing-32) var(--spacing-6) var(--spacing-24);
     overflow: hidden;
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  }
+
+  .hero__gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero__gradient-orb--1 {
+    top: 10%;
+    right: 15%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(238, 71, 35, 0.12) 0%, transparent 70%);
+  }
+
+  .hero__gradient-orb--2 {
+    bottom: 20%;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 137, 153, 0.1) 0%, transparent 70%);
   }
 
   .hero__bg-lines {
@@ -102,7 +129,8 @@ const {
     flex-direction: column;
     justify-content: space-evenly;
     pointer-events: none;
-    opacity: 0.15;
+    opacity: 0.3;
+    z-index: 1;
   }
 
   .hero__bg-line {
