@@ -1,0 +1,94 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    phases?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+
+const iconMap: Record<string, string> = {
+  'magnifying-glass': '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  'construction': '<rect width="20" height="14" x="2" y="3" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m17 8-5 5"/>',
+  'key': '<path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/>',
+};
+---
+
+<section class="process-timeline" {...storyblokEditable(blok)}>
+  <div class="process-timeline__container">
+    {blok.headline && <h2 class="process-timeline__headline">{blok.headline}</h2>}
+
+    <div class="process-timeline__phases">
+      {blok.phases?.map((phase: any, index: number) => (
+        <div class="process-timeline__phase" {...storyblokEditable(phase)}>
+          <div class="process-timeline__phase-header">
+            <div class="process-timeline__phase-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={iconMap[phase.icon] || iconMap['construction']} />
+            </div>
+            <div class="process-timeline__phase-meta">
+              <span class="process-timeline__phase-number">Phase {phase.phase_number}</span>
+              <h3 class="process-timeline__phase-title">{phase.title}</h3>
+              {phase.duration && <span class="process-timeline__phase-duration">{phase.duration}</span>}
+            </div>
+          </div>
+
+          <div class="process-timeline__phase-content">
+            <div class="process-timeline__phase-section">
+              <h4 class="process-timeline__phase-section-title">What happens:</h4>
+              <ul class="process-timeline__phase-list">
+                {phase.items?.map((item: any) => (
+                  <li>{item.text}</li>
+                ))}
+              </ul>
+            </div>
+
+            {phase.involvement && (
+              <div class="process-timeline__phase-detail">
+                <strong>Your involvement:</strong> {phase.involvement}
+              </div>
+            )}
+
+            {phase.deliverable && (
+              <div class="process-timeline__phase-detail">
+                <strong>Deliverable:</strong> {phase.deliverable}
+              </div>
+            )}
+          </div>
+
+          {index < (blok.phases?.length || 0) - 1 && (
+            <div class="process-timeline__connector" />
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .process-timeline { padding: var(--spacing-24) 0; }
+  .process-timeline__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .process-timeline__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-16); }
+  .process-timeline__phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-8); position: relative; }
+  .process-timeline__phase { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-8); position: relative; }
+  .process-timeline__phase-header { display: flex; gap: var(--spacing-4); margin-bottom: var(--spacing-6); }
+  .process-timeline__phase-icon { width: 48px; height: 48px; background: rgba(94, 234, 212, 0.1); border: 1px solid rgba(94, 234, 212, 0.3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--color-accent); flex-shrink: 0; }
+  .process-timeline__phase-icon svg { width: 24px; height: 24px; }
+  .process-timeline__phase-meta { flex: 1; }
+  .process-timeline__phase-number { font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); }
+  .process-timeline__phase-title { font-size: var(--font-size-xl); font-weight: var(--font-weight-medium); margin: var(--spacing-1) 0; }
+  .process-timeline__phase-duration { font-size: var(--font-size-sm); color: var(--color-text-muted); }
+  .process-timeline__phase-content { display: flex; flex-direction: column; gap: var(--spacing-4); }
+  .process-timeline__phase-section-title { font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--color-text-secondary); margin-bottom: var(--spacing-2); }
+  .process-timeline__phase-list { list-style: none; display: flex; flex-direction: column; gap: var(--spacing-2); }
+  .process-timeline__phase-list li { font-size: var(--font-size-sm); color: var(--color-text-secondary); padding-left: var(--spacing-4); position: relative; }
+  .process-timeline__phase-list li::before { content: '→'; position: absolute; left: 0; color: var(--color-accent); }
+  .process-timeline__phase-detail { font-size: var(--font-size-sm); color: var(--color-text-secondary); padding: var(--spacing-3); background: var(--color-bg-tertiary); border-radius: var(--radius-sm); }
+  .process-timeline__phase-detail strong { color: var(--color-text-primary); }
+  .process-timeline__connector { display: none; }
+  @media (max-width: 1024px) {
+    .process-timeline__phases { grid-template-columns: 1fr; }
+  }
+</style>

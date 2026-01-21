@@ -1,0 +1,50 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    items?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+---
+
+<section class="faq-section" {...storyblokEditable(blok)}>
+  <div class="faq-section__container">
+    {blok.headline && <h2 class="faq-section__headline">{blok.headline}</h2>}
+
+    <div class="faq-section__list">
+      {blok.items?.map((item: any, index: number) => (
+        <details class="faq-section__item" {...storyblokEditable(item)}>
+          <summary class="faq-section__question">
+            <span>{item.question}</span>
+            <svg class="faq-section__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="faq-section__answer">
+            <p>{item.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section { padding: var(--spacing-24) 0; background: var(--color-bg-secondary); }
+  .faq-section__container { max-width: var(--max-width-narrow); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .faq-section__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
+  .faq-section__list { display: flex; flex-direction: column; gap: var(--spacing-4); }
+  .faq-section__item { background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
+  .faq-section__item[open] { border-color: var(--color-border-light); }
+  .faq-section__item[open] .faq-section__icon { transform: rotate(180deg); }
+  .faq-section__question { display: flex; justify-content: space-between; align-items: center; padding: var(--spacing-6); cursor: pointer; list-style: none; font-size: var(--font-size-base); font-weight: var(--font-weight-medium); }
+  .faq-section__question::-webkit-details-marker { display: none; }
+  .faq-section__question:hover { background: var(--color-bg-tertiary); }
+  .faq-section__icon { width: 20px; height: 20px; color: var(--color-text-muted); transition: transform var(--transition-fast); flex-shrink: 0; }
+  .faq-section__answer { padding: 0 var(--spacing-6) var(--spacing-6); }
+  .faq-section__answer p { font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); }
+</style>

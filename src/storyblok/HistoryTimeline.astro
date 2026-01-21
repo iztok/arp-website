@@ -1,0 +1,47 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    events?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+---
+
+<section class="history-timeline" {...storyblokEditable(blok)}>
+  <div class="history-timeline__container">
+    {blok.headline && <h2 class="history-timeline__headline">{blok.headline}</h2>}
+
+    <div class="history-timeline__events">
+      {blok.events?.map((event: any, index: number) => (
+        <div class="history-timeline__event" {...storyblokEditable(event)}>
+          <div class="history-timeline__marker">
+            <span class="history-timeline__year">{event.year}</span>
+            <div class="history-timeline__dot" />
+          </div>
+          <div class="history-timeline__content">
+            <p>{event.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .history-timeline { padding: var(--spacing-24) 0; }
+  .history-timeline__container { max-width: var(--max-width-narrow); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .history-timeline__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
+  .history-timeline__events { position: relative; padding-left: var(--spacing-16); }
+  .history-timeline__events::before { content: ''; position: absolute; left: 60px; top: 0; bottom: 0; width: 2px; background: var(--color-border); }
+  .history-timeline__event { display: flex; gap: var(--spacing-8); margin-bottom: var(--spacing-8); position: relative; }
+  .history-timeline__event:last-child { margin-bottom: 0; }
+  .history-timeline__marker { display: flex; align-items: center; gap: var(--spacing-4); width: 80px; flex-shrink: 0; }
+  .history-timeline__year { font-size: var(--font-size-lg); font-weight: var(--font-weight-semibold); color: var(--color-accent); }
+  .history-timeline__dot { width: 12px; height: 12px; background: var(--color-accent); border-radius: 50%; position: absolute; left: 55px; top: 6px; }
+  .history-timeline__content { flex: 1; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-4) var(--spacing-6); }
+  .history-timeline__content p { font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); margin: 0; }
+</style>

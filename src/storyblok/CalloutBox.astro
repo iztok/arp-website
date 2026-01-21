@@ -1,0 +1,45 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    items?: any[];
+    footer_text?: string;
+  };
+}
+
+const { blok } = Astro.props;
+---
+
+<section class="callout-box" {...storyblokEditable(blok)}>
+  <div class="callout-box__container">
+    <div class="callout-box__card">
+      {blok.headline && <h3 class="callout-box__headline">{blok.headline}</h3>}
+
+      <ul class="callout-box__list">
+        {blok.items?.map((item: any) => (
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            {item.text}
+          </li>
+        ))}
+      </ul>
+
+      {blok.footer_text && <p class="callout-box__footer">{blok.footer_text}</p>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .callout-box { padding: var(--spacing-16) 0; }
+  .callout-box__container { max-width: var(--max-width-narrow); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .callout-box__card { background: linear-gradient(135deg, rgba(94, 234, 212, 0.1) 0%, rgba(94, 234, 212, 0.05) 100%); border: 1px solid rgba(94, 234, 212, 0.3); border-radius: var(--radius-lg); padding: var(--spacing-8); }
+  .callout-box__headline { font-size: var(--font-size-lg); font-weight: var(--font-weight-medium); margin-bottom: var(--spacing-6); }
+  .callout-box__list { list-style: none; display: flex; flex-direction: column; gap: var(--spacing-3); margin-bottom: var(--spacing-6); }
+  .callout-box__list li { display: flex; align-items: flex-start; gap: var(--spacing-3); font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+  .callout-box__list svg { width: 18px; height: 18px; color: var(--color-accent); flex-shrink: 0; margin-top: 2px; }
+  .callout-box__footer { font-size: var(--font-size-base); font-weight: var(--font-weight-medium); color: var(--color-accent); font-style: italic; }
+</style>

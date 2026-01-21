@@ -1,0 +1,109 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    tabs?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+
+const iconMap: Record<string, string> = {
+  gears: '<path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"/>',
+  chart: '<line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/>',
+  people: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  clipboard: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>',
+  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+};
+---
+
+<section class="use-case-tabs" {...storyblokEditable(blok)}>
+  <div class="use-case-tabs__container">
+    {blok.headline && <h2 class="use-case-tabs__headline">{blok.headline}</h2>}
+
+    <div class="use-case-tabs__wrapper">
+      <div class="use-case-tabs__nav" role="tablist">
+        {blok.tabs?.map((tab: any, index: number) => (
+          <button
+            class:list={['use-case-tabs__tab', { active: index === 0 }]}
+            role="tab"
+            data-tab={tab.tab_id}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={iconMap[tab.icon] || iconMap.gears} />
+            <span>{tab.tab_label}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="use-case-tabs__panels">
+        {blok.tabs?.map((tab: any, index: number) => (
+          <div
+            class:list={['use-case-tabs__panel', { active: index === 0 }]}
+            role="tabpanel"
+            data-panel={tab.tab_id}
+            {...storyblokEditable(tab)}
+          >
+            <div class="use-case-tabs__panel-content">
+              <h3 class="use-case-tabs__panel-title">Common builds:</h3>
+              <ul class="use-case-tabs__panel-list">
+                {tab.builds?.map((item: any) => (
+                  <li>{item.text}</li>
+                ))}
+              </ul>
+
+              {tab.example_text && (
+                <div class="use-case-tabs__panel-example">
+                  <h4 class="use-case-tabs__panel-example-title">{tab.example_title || 'Example scenario:'}</h4>
+                  <p>{tab.example_text}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .use-case-tabs { padding: var(--spacing-24) 0; }
+  .use-case-tabs__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .use-case-tabs__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
+  .use-case-tabs__wrapper { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
+  .use-case-tabs__nav { display: flex; flex-wrap: wrap; border-bottom: 1px solid var(--color-border); }
+  .use-case-tabs__tab { flex: 1; display: flex; align-items: center; justify-content: center; gap: var(--spacing-2); padding: var(--spacing-4) var(--spacing-6); background: transparent; border: none; font-family: var(--font-family); font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--color-text-secondary); cursor: pointer; transition: all var(--transition-fast); position: relative; min-width: 150px; }
+  .use-case-tabs__tab svg { width: 20px; height: 20px; }
+  .use-case-tabs__tab:hover { color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .use-case-tabs__tab.active { color: var(--color-accent); background: var(--color-bg-tertiary); }
+  .use-case-tabs__tab.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--color-accent); }
+  .use-case-tabs__panel { display: none; padding: var(--spacing-8); }
+  .use-case-tabs__panel.active { display: block; }
+  .use-case-tabs__panel-title { font-size: var(--font-size-lg); font-weight: var(--font-weight-medium); margin-bottom: var(--spacing-4); }
+  .use-case-tabs__panel-list { list-style: none; display: flex; flex-direction: column; gap: var(--spacing-2); margin-bottom: var(--spacing-6); }
+  .use-case-tabs__panel-list li { font-size: var(--font-size-sm); color: var(--color-text-secondary); padding-left: var(--spacing-4); position: relative; }
+  .use-case-tabs__panel-list li::before { content: '→'; position: absolute; left: 0; color: var(--color-accent); }
+  .use-case-tabs__panel-example { background: var(--color-bg-tertiary); border: 1px solid var(--color-border); border-radius: var(--radius-md); padding: var(--spacing-6); }
+  .use-case-tabs__panel-example-title { font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); color: var(--color-accent); margin-bottom: var(--spacing-2); }
+  .use-case-tabs__panel-example p { font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); font-style: italic; }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.use-case-tabs__tab');
+  const panels = document.querySelectorAll('.use-case-tabs__panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-tab');
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      panels.forEach(panel => {
+        panel.classList.remove('active');
+        if (panel.getAttribute('data-panel') === targetId) { panel.classList.add('active'); }
+      });
+    });
+  });
+</script>

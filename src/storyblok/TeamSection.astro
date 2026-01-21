@@ -1,0 +1,60 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    members?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+---
+
+<section class="team-section" {...storyblokEditable(blok)}>
+  <div class="team-section__container">
+    {blok.headline && <h2 class="team-section__headline">{blok.headline}</h2>}
+
+    <div class="team-section__grid">
+      {blok.members?.map((member: any) => (
+        <div class="team-section__card" {...storyblokEditable(member)}>
+          <div class="team-section__photo">
+            {member.photo?.filename ? (
+              <img src={member.photo.filename} alt={member.name} />
+            ) : (
+              <div class="team-section__photo-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
+            )}
+          </div>
+          <div class="team-section__info">
+            <h3 class="team-section__name">{member.name}</h3>
+            <p class="team-section__role">{member.role}</p>
+            {member.focus && <p class="team-section__focus">{member.focus}</p>}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .team-section { padding: var(--spacing-24) 0; }
+  .team-section__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .team-section__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
+  .team-section__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-6); }
+  .team-section__card { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-6); text-align: center; transition: border-color var(--transition-fast); }
+  .team-section__card:hover { border-color: var(--color-border-light); }
+  .team-section__photo { width: 100px; height: 100px; margin: 0 auto var(--spacing-4); border-radius: 50%; overflow: hidden; background: var(--color-bg-tertiary); }
+  .team-section__photo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-section__photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); }
+  .team-section__photo-placeholder svg { width: 48px; height: 48px; }
+  .team-section__name { font-size: var(--font-size-lg); font-weight: var(--font-weight-medium); margin-bottom: var(--spacing-1); }
+  .team-section__role { font-size: var(--font-size-sm); color: var(--color-accent); margin-bottom: var(--spacing-2); }
+  .team-section__focus { font-size: var(--font-size-xs); color: var(--color-text-muted); }
+  @media (max-width: 1024px) { .team-section__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) { .team-section__grid { grid-template-columns: 1fr; } }
+</style>

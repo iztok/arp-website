@@ -1,0 +1,85 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    columns?: any[];
+    rows?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+---
+
+<section class="comparison-table" {...storyblokEditable(blok)}>
+  <div class="comparison-table__container">
+    {blok.headline && <h2 class="comparison-table__headline">{blok.headline}</h2>}
+
+    <div class="comparison-table__wrapper">
+      <table class="comparison-table__table">
+        <thead>
+          <tr>
+            <th class="comparison-table__header comparison-table__header--label"></th>
+            {blok.columns?.map((col: any) => (
+              <th class:list={['comparison-table__header', { 'comparison-table__header--highlight': col.highlight }]}>
+                {col.title}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {blok.rows?.map((row: any) => (
+            <tr class="comparison-table__row">
+              <td class="comparison-table__cell comparison-table__cell--label">{row.label}</td>
+              {row.values?.map((cell: any, index: number) => (
+                <td class:list={['comparison-table__cell', `comparison-table__cell--${cell.type || 'text'}`, { 'comparison-table__cell--highlight': blok.columns?.[index]?.highlight }]}>
+                  {cell.type === 'yes' && (
+                    <span class="comparison-table__badge comparison-table__badge--yes">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                      {cell.value || 'Yes'}
+                    </span>
+                  )}
+                  {cell.type === 'no' && (
+                    <span class="comparison-table__badge comparison-table__badge--no">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                      {cell.value || 'No'}
+                    </span>
+                  )}
+                  {cell.type === 'partial' && (
+                    <span class="comparison-table__badge comparison-table__badge--partial">
+                      {cell.value || 'Varies'}
+                    </span>
+                  )}
+                  {cell.type === 'text' && cell.value}
+                  {!cell.type && cell.value}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison-table { padding: var(--spacing-24) 0; }
+  .comparison-table__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .comparison-table__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
+  .comparison-table__wrapper { overflow-x: auto; }
+  .comparison-table__table { width: 100%; border-collapse: collapse; background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden; }
+  .comparison-table__header { padding: var(--spacing-4) var(--spacing-6); text-align: center; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); background: var(--color-bg-tertiary); border-bottom: 1px solid var(--color-border); }
+  .comparison-table__header--label { width: 200px; }
+  .comparison-table__header--highlight { background: rgba(94, 234, 212, 0.1); color: var(--color-accent); }
+  .comparison-table__row { border-bottom: 1px solid var(--color-border); }
+  .comparison-table__row:last-child { border-bottom: none; }
+  .comparison-table__cell { padding: var(--spacing-4) var(--spacing-6); text-align: center; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+  .comparison-table__cell--label { text-align: left; font-weight: var(--font-weight-medium); color: var(--color-text-primary); background: var(--color-bg-tertiary); }
+  .comparison-table__cell--highlight { background: rgba(94, 234, 212, 0.05); }
+  .comparison-table__badge { display: inline-flex; align-items: center; gap: var(--spacing-1); padding: var(--spacing-1) var(--spacing-2); border-radius: var(--radius-sm); font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); }
+  .comparison-table__badge svg { width: 14px; height: 14px; }
+  .comparison-table__badge--yes { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+  .comparison-table__badge--no { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
+  .comparison-table__badge--partial { background: rgba(234, 179, 8, 0.1); color: #eab308; }
+</style>

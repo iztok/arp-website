@@ -1,0 +1,41 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    copy?: string;
+    stats?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+---
+
+<section class="stats-blocks" {...storyblokEditable(blok)}>
+  <div class="stats-blocks__container">
+    {blok.headline && <h2 class="stats-blocks__headline">{blok.headline}</h2>}
+
+    <div class="stats-blocks__grid">
+      {blok.stats?.map((stat: any) => (
+        <div class="stats-blocks__item" {...storyblokEditable(stat)}>
+          <span class="stats-blocks__value">{stat.value}</span>
+          <span class="stats-blocks__label">{stat.label}</span>
+        </div>
+      ))}
+    </div>
+
+    {blok.copy && <p class="stats-blocks__copy">{blok.copy}</p>}
+  </div>
+</section>
+
+<style>
+  .stats-blocks { padding: var(--spacing-24) 0; background: var(--color-bg-secondary); }
+  .stats-blocks__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .stats-blocks__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
+  .stats-blocks__grid { display: flex; justify-content: center; gap: var(--spacing-8); flex-wrap: wrap; margin-bottom: var(--spacing-8); }
+  .stats-blocks__item { background: var(--color-bg-primary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-6) var(--spacing-8); text-align: center; min-width: 150px; }
+  .stats-blocks__value { display: block; font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); color: var(--color-accent); margin-bottom: var(--spacing-2); }
+  .stats-blocks__label { display: block; font-size: var(--font-size-sm); color: var(--color-text-secondary); }
+  .stats-blocks__copy { font-size: var(--font-size-lg); color: var(--color-text-secondary); text-align: center; max-width: 700px; margin: 0 auto; line-height: var(--line-height-relaxed); }
+</style>

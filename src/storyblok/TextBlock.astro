@@ -1,0 +1,32 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    content?: any;
+  };
+}
+
+const { blok } = Astro.props;
+const renderedContent = blok.content ? renderRichText(blok.content) : '';
+---
+
+<section class="text-block" {...storyblokEditable(blok)}>
+  <div class="text-block__container">
+    {blok.headline && <h2 class="text-block__headline">{blok.headline}</h2>}
+    {renderedContent && <div class="text-block__content" set:html={renderedContent} />}
+  </div>
+</section>
+
+<style>
+  .text-block { padding: var(--spacing-16) 0; }
+  .text-block__container { max-width: var(--max-width-narrow); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .text-block__headline { font-size: var(--font-size-3xl); font-weight: var(--font-weight-light); margin-bottom: var(--spacing-8); }
+  .text-block__content { font-size: var(--font-size-lg); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); }
+  .text-block__content :global(p) { margin-bottom: var(--spacing-4); }
+  .text-block__content :global(p:last-child) { margin-bottom: 0; }
+  .text-block__content :global(strong) { color: var(--color-text-primary); font-weight: var(--font-weight-medium); }
+  .text-block__content :global(em) { font-style: italic; }
+  .text-block__content :global(a) { color: var(--color-accent); text-decoration: underline; }
+</style>

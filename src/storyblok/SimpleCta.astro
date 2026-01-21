@@ -1,0 +1,42 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    copy?: string;
+    primary_cta_text?: string;
+    primary_cta_link?: { url?: string; cached_url?: string };
+    secondary_cta_text?: string;
+    secondary_cta_link?: { url?: string; cached_url?: string };
+  };
+}
+
+const { blok } = Astro.props;
+const primaryHref = blok.primary_cta_link?.cached_url || blok.primary_cta_link?.url || '#';
+const secondaryHref = blok.secondary_cta_link?.cached_url || blok.secondary_cta_link?.url || '#';
+---
+
+<section class="simple-cta" {...storyblokEditable(blok)}>
+  <div class="simple-cta__container">
+    {blok.headline && <h2 class="simple-cta__headline">{blok.headline}</h2>}
+    {blok.copy && <p class="simple-cta__copy">{blok.copy}</p>}
+
+    <div class="simple-cta__buttons">
+      {blok.primary_cta_text && (
+        <a href={primaryHref} class="btn btn--primary btn--large">{blok.primary_cta_text}</a>
+      )}
+      {blok.secondary_cta_text && (
+        <a href={secondaryHref} class="btn btn--outline btn--large">{blok.secondary_cta_text}</a>
+      )}
+    </div>
+  </div>
+</section>
+
+<style>
+  .simple-cta { padding: var(--spacing-24) 0; background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%); border-top: 1px solid var(--color-border); }
+  .simple-cta__container { max-width: var(--max-width-narrow); margin: 0 auto; padding: 0 var(--spacing-6); text-align: center; }
+  .simple-cta__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); margin-bottom: var(--spacing-4); }
+  .simple-cta__copy { font-size: var(--font-size-lg); color: var(--color-text-secondary); margin-bottom: var(--spacing-8); max-width: 500px; margin-left: auto; margin-right: auto; }
+  .simple-cta__buttons { display: flex; gap: var(--spacing-4); justify-content: center; flex-wrap: wrap; }
+</style>

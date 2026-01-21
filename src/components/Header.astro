@@ -6,10 +6,10 @@ interface Props {
 const { transparent = true } = Astro.props;
 
 const navLinks = [
-  { label: 'Platform', href: '/platform' },
-  { label: 'Solutions', href: '/solutions' },
-  { label: 'Resources', href: '/resources' },
-  { label: 'Pricing', href: '/pricing' },
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'Use Cases', href: '/use-cases' },
+  { label: 'Team', href: '/team' },
+  { label: 'About', href: '/about-manifesto' },
 ];
 ---
 
@@ -31,9 +31,7 @@ const navLinks = [
     </nav>
 
     <div class="header__actions">
-      <a href="/login" class="header__action-link">Sign in</a>
-      <a href="/demo" class="btn btn--outline header__btn">Book a demo</a>
-      <a href="/start" class="btn btn--primary header__btn">Start Building</a>
+      <a href="/contact" class="btn btn--primary header__btn">Talk to Sales</a>
     </div>
 
     <button class="header__mobile-toggle" aria-label="Toggle menu">

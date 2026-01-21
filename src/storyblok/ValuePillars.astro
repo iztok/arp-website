@@ -1,0 +1,52 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    pillars?: any[];
+  };
+}
+
+const { blok } = Astro.props;
+
+const iconMap: Record<string, string> = {
+  ownership: '<path d="m21 2-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/>',
+  craftsmanship: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  transparency: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+  enterprise: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
+  laravel: '<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>',
+  delivery: '<rect width="16" height="16" x="4" y="4" rx="2"/><path d="m9 12 2 2 4-4"/>',
+};
+---
+
+<section class="value-pillars" {...storyblokEditable(blok)}>
+  <div class="value-pillars__container">
+    {blok.headline && <h2 class="value-pillars__headline">{blok.headline}</h2>}
+
+    <div class="value-pillars__grid">
+      {blok.pillars?.map((pillar: any) => (
+        <div class="value-pillars__card" {...storyblokEditable(pillar)}>
+          <div class="value-pillars__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={iconMap[pillar.icon] || iconMap.ownership} />
+          </div>
+          <h3 class="value-pillars__title">{pillar.title}</h3>
+          <p class="value-pillars__description">{pillar.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .value-pillars { padding: var(--spacing-24) 0; }
+  .value-pillars__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); }
+  .value-pillars__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
+  .value-pillars__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-6); }
+  .value-pillars__card { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-8); text-align: center; }
+  .value-pillars__icon { width: 56px; height: 56px; margin: 0 auto var(--spacing-4); background: rgba(94, 234, 212, 0.1); border: 1px solid rgba(94, 234, 212, 0.3); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--color-accent); }
+  .value-pillars__icon svg { width: 28px; height: 28px; }
+  .value-pillars__title { font-size: var(--font-size-xl); font-weight: var(--font-weight-medium); margin-bottom: var(--spacing-3); }
+  .value-pillars__description { font-size: var(--font-size-sm); color: var(--color-text-secondary); line-height: var(--line-height-relaxed); }
+  @media (max-width: 768px) { .value-pillars__grid { grid-template-columns: 1fr; } }
+</style>
