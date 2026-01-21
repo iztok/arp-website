@@ -3,10 +3,5 @@
 	"buildCommand": "npm run build",
 	"outputDirectory": "dist",
 	"framework": "astro",
-	"trailingSlash": false,
-	"functions": {
-		"**/*": {
-			"runtime": "nodejs20.x"
-		}
-	}
+	"trailingSlash": false
 }
