@@ -1,19 +1,25 @@
 ---
-import { useStoryblokApi } from '@storyblok/astro';
+import { getLiveStory, useStoryblokApi } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
 
 const { slug } = Astro.params;
+let story = null;
 
-const storyblokApi = useStoryblokApi();
-
-let story;
-try {
-	const { data } = await storyblokApi.get(`cdn/stories/${slug || 'home'}`, {
-		version: 'draft'
-	});
-	story = data.story;
-} catch (error) {
-	return Astro.redirect('/404');
+// Check for live preview content first (enables real-time editing)
+const liveStory = await getLiveStory(Astro);
+if (liveStory) {
+	story = liveStory;
+} else {
+	// Fallback to API fetch when not in live preview
+	const storyblokApi = useStoryblokApi();
+	try {
+		const { data } = await storyblokApi.get(`cdn/stories/${slug || 'home'}`, {
+			version: 'draft'
+		});
+		story = data.story;
+	} catch (error) {
+		return Astro.redirect('/404');
+	}
 }
 ---
 
