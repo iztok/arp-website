@@ -1,0 +1,177 @@
+---
+interface Badge {
+  label: string;
+  icon?: string;
+}
+
+interface Props {
+  headline?: string;
+  badges?: Badge[];
+  note?: string;
+}
+
+const {
+  headline = 'Built for businesses who want to own their software',
+  badges = [
+    { label: 'Self-Hosted' },
+    { label: 'GDPR Ready' },
+    { label: 'SOC2 Compatible' },
+    { label: 'Open Source' },
+  ],
+  note = 'Trusted by forward-thinking operations teams',
+} = Astro.props;
+---
+
+<section class="logo-bar">
+  <div class="logo-bar__container">
+    <p class="logo-bar__headline">{headline}</p>
+
+    <div class="logo-bar__badges">
+      {badges.map((badge) => (
+        <span class="logo-bar__badge">
+          <svg class="logo-bar__badge-icon" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+          </svg>
+          {badge.label}
+        </span>
+      ))}
+    </div>
+
+    <p class="logo-bar__note">{note}</p>
+
+    <div class="logo-bar__grid">
+      <!-- Placeholder logos - replace with actual client logos when available -->
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div class="logo-bar__logo-cell">
+          <div class="logo-bar__logo-placeholder">
+            <span>Partner {i + 1}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .logo-bar {
+    padding: var(--spacing-16) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .logo-bar__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    text-align: center;
+  }
+
+  .logo-bar__headline {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .logo-bar__badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .logo-bar__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .logo-bar__badge-icon {
+    color: var(--color-accent);
+  }
+
+  .logo-bar__note {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .logo-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .logo-bar__logo-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-6);
+    border-right: 1px solid var(--color-border);
+    transition: background-color var(--transition-fast);
+  }
+
+  .logo-bar__logo-cell:last-child {
+    border-right: none;
+  }
+
+  .logo-bar__logo-cell:hover {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .logo-bar__logo-placeholder {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 1024px) {
+    .logo-bar__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .logo-bar__logo-cell:nth-child(3) {
+      border-right: none;
+    }
+
+    .logo-bar__logo-cell:nth-child(n+4) {
+      border-top: 1px solid var(--color-border);
+    }
+
+    .logo-bar__logo-cell:nth-child(4) {
+      border-right: 1px solid var(--color-border);
+    }
+
+    .logo-bar__logo-cell:nth-child(5) {
+      border-right: 1px solid var(--color-border);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .logo-bar__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .logo-bar__logo-cell {
+      border-right: none;
+    }
+
+    .logo-bar__logo-cell:nth-child(odd) {
+      border-right: 1px solid var(--color-border);
+    }
+
+    .logo-bar__logo-cell:nth-child(n+3) {
+      border-top: 1px solid var(--color-border);
+    }
+  }
+</style>

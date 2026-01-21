@@ -1,0 +1,670 @@
+{
+  "components": [
+    {
+      "name": "page",
+      "display_name": "Page",
+      "schema": {
+        "body": {
+          "type": "bloks",
+          "display_name": "Body",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["hero", "logo_bar", "value_proposition", "scrolling_cards", "feature_grid", "tabbed_demo", "comparison_section", "stats_grid", "process_steps", "blog_preview", "final_cta"]
+        }
+      },
+      "is_root": true,
+      "is_nestable": false
+    },
+    {
+      "name": "hero",
+      "display_name": "Hero Section",
+      "schema": {
+        "eyebrow": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Eyebrow Text",
+          "default_value": "OPEN SOURCE · Software you own, forever."
+        },
+        "phrases": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Typewriter Phrases",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["hero_phrase"]
+        },
+        "supporting_text": {
+          "type": "textarea",
+          "pos": 2,
+          "display_name": "Supporting Text"
+        },
+        "cta_text": {
+          "type": "text",
+          "pos": 3,
+          "display_name": "CTA Button Text",
+          "default_value": "Start Building"
+        },
+        "cta_link": {
+          "type": "link",
+          "pos": 4,
+          "display_name": "CTA Button Link"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-center",
+      "color": "#5eead4"
+    },
+    {
+      "name": "hero_phrase",
+      "display_name": "Hero Phrase",
+      "schema": {
+        "use_case": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Use Case",
+          "description": "e.g., CRM that tracks client relationships"
+        },
+        "infrastructure": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Infrastructure",
+          "description": "e.g., own servers"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-text-l"
+    },
+    {
+      "name": "logo_bar",
+      "display_name": "Logo Bar",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "badges": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Badges",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["badge"]
+        },
+        "note": {
+          "type": "text",
+          "pos": 2,
+          "display_name": "Note Text"
+        },
+        "logos": {
+          "type": "bloks",
+          "pos": 3,
+          "display_name": "Partner Logos",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["logo_item"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-buildin"
+    },
+    {
+      "name": "badge",
+      "display_name": "Badge",
+      "schema": {
+        "label": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Label"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "logo_item",
+      "display_name": "Logo Item",
+      "schema": {
+        "name": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Company Name"
+        },
+        "logo": {
+          "type": "asset",
+          "pos": 1,
+          "display_name": "Logo Image",
+          "filetypes": ["images"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "value_proposition",
+      "display_name": "Value Proposition",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "copy": {
+          "type": "textarea",
+          "pos": 1,
+          "display_name": "Copy"
+        },
+        "primary_cta_text": {
+          "type": "text",
+          "pos": 2,
+          "display_name": "Primary CTA Text"
+        },
+        "primary_cta_link": {
+          "type": "link",
+          "pos": 3,
+          "display_name": "Primary CTA Link"
+        },
+        "secondary_cta_text": {
+          "type": "text",
+          "pos": 4,
+          "display_name": "Secondary CTA Text"
+        },
+        "secondary_cta_link": {
+          "type": "link",
+          "pos": 5,
+          "display_name": "Secondary CTA Link"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-2-col"
+    },
+    {
+      "name": "scrolling_cards",
+      "display_name": "Scrolling Cards Section",
+      "schema": {
+        "section_title": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Section Title"
+        },
+        "cards": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Cards",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["use_case_card"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-stacked"
+    },
+    {
+      "name": "use_case_card",
+      "display_name": "Use Case Card",
+      "schema": {
+        "category": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Category"
+        },
+        "icon": {
+          "type": "option",
+          "pos": 1,
+          "display_name": "Icon",
+          "source": "self",
+          "options": [
+            {"name": "Gears", "value": "gears"},
+            {"name": "Calculator", "value": "calculator"},
+            {"name": "Building", "value": "building"}
+          ]
+        },
+        "headline": {
+          "type": "text",
+          "pos": 2,
+          "display_name": "Headline"
+        },
+        "copy": {
+          "type": "textarea",
+          "pos": 3,
+          "display_name": "Copy"
+        },
+        "tag_label": {
+          "type": "text",
+          "pos": 4,
+          "display_name": "Tag Label"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "feature_grid",
+      "display_name": "Feature Grid",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "features": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Features",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["feature_item"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-table"
+    },
+    {
+      "name": "feature_item",
+      "display_name": "Feature Item",
+      "schema": {
+        "icon": {
+          "type": "option",
+          "pos": 0,
+          "display_name": "Icon",
+          "source": "self",
+          "options": [
+            {"name": "Code", "value": "code"},
+            {"name": "Connection", "value": "connection"},
+            {"name": "AI", "value": "ai"},
+            {"name": "Dev Stack", "value": "dev"},
+            {"name": "Shield", "value": "shield"},
+            {"name": "Open Source", "value": "opensource"}
+          ]
+        },
+        "headline": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Headline"
+        },
+        "copy": {
+          "type": "textarea",
+          "pos": 2,
+          "display_name": "Copy"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "tabbed_demo",
+      "display_name": "Tabbed Demo Section",
+      "schema": {
+        "section_title": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Section Title"
+        },
+        "section_copy": {
+          "type": "textarea",
+          "pos": 1,
+          "display_name": "Section Copy"
+        },
+        "tabs": {
+          "type": "bloks",
+          "pos": 2,
+          "display_name": "Tabs",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["demo_tab"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-menu"
+    },
+    {
+      "name": "demo_tab",
+      "display_name": "Demo Tab",
+      "schema": {
+        "tab_id": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Tab ID",
+          "description": "e.g., chat, visual, code"
+        },
+        "tab_label": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Tab Label"
+        },
+        "headline": {
+          "type": "text",
+          "pos": 2,
+          "display_name": "Headline"
+        },
+        "copy": {
+          "type": "textarea",
+          "pos": 3,
+          "display_name": "Copy"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "comparison_section",
+      "display_name": "Comparison Section",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "left_title": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Left Column Title"
+        },
+        "left_items": {
+          "type": "bloks",
+          "pos": 2,
+          "display_name": "Left Column Items",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["comparison_item"]
+        },
+        "right_title": {
+          "type": "text",
+          "pos": 3,
+          "display_name": "Right Column Title"
+        },
+        "right_items": {
+          "type": "bloks",
+          "pos": 4,
+          "display_name": "Right Column Items",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["comparison_item"]
+        },
+        "cta_text": {
+          "type": "text",
+          "pos": 5,
+          "display_name": "CTA Text"
+        },
+        "cta_link": {
+          "type": "link",
+          "pos": 6,
+          "display_name": "CTA Link"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-2-col"
+    },
+    {
+      "name": "comparison_item",
+      "display_name": "Comparison Item",
+      "schema": {
+        "text": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Text"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "stats_grid",
+      "display_name": "Stats Grid",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "stats": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Stats",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["stat_item"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-table-2"
+    },
+    {
+      "name": "stat_item",
+      "display_name": "Stat Item",
+      "schema": {
+        "value": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Value",
+          "description": "e.g., €240K, 4 weeks"
+        },
+        "label": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Label"
+        },
+        "company": {
+          "type": "text",
+          "pos": 2,
+          "display_name": "Company"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "process_steps",
+      "display_name": "Process Steps",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "supporting_message": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Supporting Message"
+        },
+        "steps": {
+          "type": "bloks",
+          "pos": 2,
+          "display_name": "Steps",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["process_step"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-arrow-right"
+    },
+    {
+      "name": "process_step",
+      "display_name": "Process Step",
+      "schema": {
+        "number": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Step Number",
+          "description": "e.g., 01, 02, 03"
+        },
+        "title": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Title"
+        },
+        "description": {
+          "type": "textarea",
+          "pos": 2,
+          "display_name": "Description"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "blog_preview",
+      "display_name": "Blog Preview",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "posts": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Blog Posts",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["blog_post_preview"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-text-img-l"
+    },
+    {
+      "name": "blog_post_preview",
+      "display_name": "Blog Post Preview",
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Title"
+        },
+        "link": {
+          "type": "link",
+          "pos": 1,
+          "display_name": "Link"
+        },
+        "category": {
+          "type": "text",
+          "pos": 2,
+          "display_name": "Category"
+        },
+        "image": {
+          "type": "asset",
+          "pos": 3,
+          "display_name": "Image",
+          "filetypes": ["images"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "final_cta",
+      "display_name": "Final CTA Section",
+      "schema": {
+        "headline": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Headline"
+        },
+        "subheadline": {
+          "type": "text",
+          "pos": 1,
+          "display_name": "Subheadline"
+        },
+        "primary_cta_text": {
+          "type": "text",
+          "pos": 2,
+          "display_name": "Primary CTA Text"
+        },
+        "primary_cta_link": {
+          "type": "link",
+          "pos": 3,
+          "display_name": "Primary CTA Link"
+        },
+        "secondary_cta_text": {
+          "type": "text",
+          "pos": 4,
+          "display_name": "Secondary CTA Text"
+        },
+        "secondary_cta_link": {
+          "type": "link",
+          "pos": 5,
+          "display_name": "Secondary CTA Link"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true,
+      "icon": "block-center"
+    },
+    {
+      "name": "site_config",
+      "display_name": "Site Configuration",
+      "schema": {
+        "header_nav_links": {
+          "type": "bloks",
+          "pos": 0,
+          "display_name": "Header Nav Links",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["nav_link"]
+        },
+        "footer_columns": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Footer Columns",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["footer_column"]
+        }
+      },
+      "is_root": true,
+      "is_nestable": false
+    },
+    {
+      "name": "nav_link",
+      "display_name": "Navigation Link",
+      "schema": {
+        "label": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Label"
+        },
+        "link": {
+          "type": "link",
+          "pos": 1,
+          "display_name": "Link"
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    },
+    {
+      "name": "footer_column",
+      "display_name": "Footer Column",
+      "schema": {
+        "title": {
+          "type": "text",
+          "pos": 0,
+          "display_name": "Title"
+        },
+        "links": {
+          "type": "bloks",
+          "pos": 1,
+          "display_name": "Links",
+          "restrict_type": "",
+          "restrict_components": true,
+          "component_whitelist": ["nav_link"]
+        }
+      },
+      "is_root": false,
+      "is_nestable": true
+    }
+  ]
+}

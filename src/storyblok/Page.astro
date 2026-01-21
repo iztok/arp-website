@@ -1,13 +1,21 @@
 ---
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
 import { storyblokEditable } from '@storyblok/astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
 const { blok } = Astro.props;
 ---
 
-<main {...storyblokEditable(blok)}>
-	{
-		blok.body?.map((nestedBlok) => {
-			return <StoryblokComponent blok={nestedBlok} />;
-		})
-	}
-</main>
+<BaseLayout title={blok.title || 'AgileRP'}>
+	<Header />
+	<main {...storyblokEditable(blok)}>
+		{
+			blok.body?.map((nestedBlok) => {
+				return <StoryblokComponent blok={nestedBlok} />;
+			})
+		}
+	</main>
+	<Footer />
+</BaseLayout>

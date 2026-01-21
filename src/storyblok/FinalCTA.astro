@@ -1,0 +1,88 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    subheadline?: string;
+    primary_cta_text?: string;
+    primary_cta_link?: { url?: string; cached_url?: string };
+    secondary_cta_text?: string;
+    secondary_cta_link?: { url?: string; cached_url?: string };
+    tech_logos?: string;
+  };
+}
+
+const { blok } = Astro.props;
+const primaryHref = blok.primary_cta_link?.cached_url || blok.primary_cta_link?.url || '#';
+const secondaryHref = blok.secondary_cta_link?.cached_url || blok.secondary_cta_link?.url || '#';
+const techLogos = blok.tech_logos ? blok.tech_logos.split(',').map((s: string) => s.trim()) : [];
+---
+
+<section class="final-cta" {...storyblokEditable(blok)}>
+  <div class="final-cta__container">
+    <div class="final-cta__content">
+      {blok.headline && <h2 class="final-cta__headline">{blok.headline}</h2>}
+      {blok.subheadline && <p class="final-cta__subheadline">{blok.subheadline}</p>}
+
+      <div class="final-cta__buttons">
+        {blok.primary_cta_text && (
+          <a href={primaryHref} class="btn btn--primary btn--large">{blok.primary_cta_text}</a>
+        )}
+        {blok.secondary_cta_text && (
+          <a href={secondaryHref} class="btn btn--outline btn--large">{blok.secondary_cta_text}</a>
+        )}
+      </div>
+
+      {techLogos.length > 0 && (
+        <div class="final-cta__logos">
+          {techLogos.map((logo: string) => (
+            <span class="final-cta__logo">{logo}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    <div class="final-cta__visual">
+      <div class="final-cta__illustration">
+        <svg viewBox="0 0 300 250" fill="none" class="final-cta__illustration-svg">
+          <rect x="140" y="50" width="120" height="150" rx="8" fill="var(--color-bg-tertiary)" stroke="var(--color-border)" stroke-width="2"/>
+          <rect x="155" y="70" width="90" height="20" rx="4" fill="var(--color-bg-secondary)"/>
+          <circle cx="165" cy="80" r="4" fill="var(--color-accent)"/>
+          <rect x="155" y="100" width="90" height="20" rx="4" fill="var(--color-bg-secondary)"/>
+          <circle cx="165" cy="110" r="4" fill="var(--color-accent)" opacity="0.5"/>
+          <rect x="155" y="130" width="90" height="20" rx="4" fill="var(--color-bg-secondary)"/>
+          <circle cx="165" cy="140" r="4" fill="var(--color-accent)" opacity="0.3"/>
+          <rect x="155" y="160" width="90" height="20" rx="4" fill="var(--color-bg-secondary)"/>
+          <circle cx="80" cy="100" r="25" fill="var(--color-text-primary)"/>
+          <path d="M50 200 L50 150 Q50 130 70 130 L90 130 Q110 130 110 150 L110 200" fill="var(--color-text-primary)"/>
+          <g transform="translate(95, 135) rotate(-30)">
+            <rect x="0" y="0" width="60" height="12" rx="6" fill="var(--color-accent)"/>
+            <rect x="50" y="-5" width="20" height="22" rx="3" fill="var(--color-accent)"/>
+            <rect x="55" y="2" width="10" height="8" rx="1" fill="var(--color-bg-primary)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final-cta { padding: var(--spacing-24) 0; background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%); border-top: 1px solid var(--color-border); }
+  .final-cta__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-16); align-items: center; }
+  .final-cta__content { text-align: center; }
+  .final-cta__headline { font-size: var(--font-size-5xl); font-weight: var(--font-weight-light); margin-bottom: var(--spacing-4); }
+  .final-cta__subheadline { font-size: var(--font-size-xl); color: var(--color-text-secondary); margin-bottom: var(--spacing-8); }
+  .final-cta__buttons { display: flex; gap: var(--spacing-4); justify-content: center; flex-wrap: wrap; margin-bottom: var(--spacing-10); }
+  .final-cta__logos { display: flex; gap: var(--spacing-6); justify-content: center; flex-wrap: wrap; }
+  .final-cta__logo { font-size: var(--font-size-sm); color: var(--color-text-muted); padding: var(--spacing-2) var(--spacing-3); border: 1px solid var(--color-border); border-radius: var(--radius-sm); }
+  .final-cta__visual { display: flex; justify-content: center; align-items: center; }
+  .final-cta__illustration { width: 100%; max-width: 350px; }
+  .final-cta__illustration-svg { width: 100%; height: auto; }
+  @media (max-width: 1024px) {
+    .final-cta__container { grid-template-columns: 1fr; text-align: center; }
+    .final-cta__visual { order: -1; }
+    .final-cta__illustration { max-width: 250px; }
+  }
+  @media (max-width: 640px) { .final-cta__headline { font-size: var(--font-size-3xl); } }
+</style>

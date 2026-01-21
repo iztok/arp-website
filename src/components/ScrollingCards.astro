@@ -1,0 +1,447 @@
+---
+interface Card {
+  category: string;
+  icon: string;
+  headline: string;
+  copy: string;
+  tagLabel: string;
+  tagIcons?: string[];
+}
+
+interface Props {
+  sectionTitle?: string;
+  cards?: Card[];
+}
+
+const {
+  sectionTitle = 'The development platform for every use case',
+  cards = [
+    {
+      category: 'Operations Teams',
+      icon: 'gears',
+      headline: 'Build the tools spreadsheets can\'t handle',
+      copy: 'From inventory tracking to approval workflows, create purpose-built software that your team actually uses—without waiting for IT.',
+      tagLabel: 'CONNECT YOUR SYSTEMS',
+      tagIcons: ['postgresql', 'mysql', 'api'],
+    },
+    {
+      category: 'Finance & Admin',
+      icon: 'calculator',
+      headline: 'Replace fragile spreadsheets with real applications',
+      copy: 'Build invoice systems, expense trackers, and reporting dashboards that connect to your actual business data.',
+      tagLabel: 'USE YOUR DATA',
+      tagIcons: ['database', 'chart'],
+    },
+    {
+      category: 'Growing Companies',
+      icon: 'building',
+      headline: 'Skip the SaaS treadmill',
+      copy: 'Stop paying monthly for software you\'ll outgrow. Build exactly what you need, own it forever, and evolve it as you scale.',
+      tagLabel: 'OWN YOUR STACK',
+      tagIcons: ['laravel', 'filament', 'code'],
+    },
+  ],
+} = Astro.props;
+
+const iconMap: Record<string, string> = {
+  gears: '<path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1Z"/>',
+  calculator: '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/>',
+  building: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
+};
+---
+
+<section class="scrolling-cards">
+  <div class="scrolling-cards__container">
+    <div class="scrolling-cards__left">
+      <h2 class="scrolling-cards__title">{sectionTitle}</h2>
+
+      <div class="scrolling-cards__cards">
+        {cards.map((card, index) => (
+          <div class="scrolling-cards__card" data-index={index}>
+            <div class="scrolling-cards__card-header">
+              <div class="scrolling-cards__card-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={iconMap[card.icon] || iconMap.gears}
+                />
+              </div>
+              <span class="scrolling-cards__card-category">{card.category}</span>
+            </div>
+            <h3 class="scrolling-cards__card-headline">{card.headline}</h3>
+            <p class="scrolling-cards__card-copy">{card.copy}</p>
+            <div class="scrolling-cards__card-tag">
+              <span class="scrolling-cards__card-tag-label">{card.tagLabel}</span>
+              <div class="scrolling-cards__card-tag-icons">
+                {card.tagIcons?.map(() => (
+                  <span class="scrolling-cards__card-tag-icon"></span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="scrolling-cards__right">
+      <div class="scrolling-cards__demo">
+        <div class="scrolling-cards__demo-window">
+          <div class="scrolling-cards__demo-header">
+            <div class="scrolling-cards__demo-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="scrolling-cards__demo-title">AgileRP Builder</span>
+          </div>
+          <div class="scrolling-cards__demo-content">
+            <div class="scrolling-cards__demo-sidebar">
+              <div class="scrolling-cards__demo-sidebar-item"></div>
+              <div class="scrolling-cards__demo-sidebar-item"></div>
+              <div class="scrolling-cards__demo-sidebar-item active"></div>
+              <div class="scrolling-cards__demo-sidebar-item"></div>
+            </div>
+            <div class="scrolling-cards__demo-main">
+              <div class="scrolling-cards__demo-toolbar">
+                <div class="scrolling-cards__demo-tool"></div>
+                <div class="scrolling-cards__demo-tool"></div>
+                <div class="scrolling-cards__demo-tool"></div>
+              </div>
+              <div class="scrolling-cards__demo-canvas">
+                <div class="scrolling-cards__demo-component scrolling-cards__demo-component--table">
+                  <div class="scrolling-cards__demo-table-header">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="scrolling-cards__demo-table-row">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="scrolling-cards__demo-table-row">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="scrolling-cards__demo-table-row">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="scrolling-cards__demo-chat">
+              <div class="scrolling-cards__demo-chat-header">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L9 9L2 12L9 15L12 22L15 15L22 12L15 9L12 2Z"/>
+                </svg>
+                AI
+              </div>
+              <div class="scrolling-cards__demo-chat-content">
+                <div class="scrolling-cards__demo-chat-typing">
+                  Building your component...
+                  <span class="scrolling-cards__demo-chat-cursor"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scrolling-cards {
+    padding: var(--spacing-24) 0;
+  }
+
+  .scrolling-cards__container {
+    max-width: var(--max-width-wide);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-16);
+  }
+
+  .scrolling-cards__left {
+    position: relative;
+  }
+
+  .scrolling-cards__title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    margin-bottom: var(--spacing-12);
+    position: sticky;
+    top: 100px;
+  }
+
+  .scrolling-cards__cards {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+  }
+
+  .scrolling-cards__card {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    transition: border-color var(--transition-fast);
+  }
+
+  .scrolling-cards__card:hover {
+    border-color: var(--color-border-light);
+  }
+
+  .scrolling-cards__card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .scrolling-cards__card-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--color-accent);
+  }
+
+  .scrolling-cards__card-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .scrolling-cards__card-category {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+  }
+
+  .scrolling-cards__card-headline {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-3);
+  }
+
+  .scrolling-cards__card-copy {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .scrolling-cards__card-tag {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-2) var(--spacing-3);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+    width: fit-content;
+  }
+
+  .scrolling-cards__card-tag-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .scrolling-cards__card-tag-icons {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  .scrolling-cards__card-tag-icon {
+    width: 16px;
+    height: 16px;
+    background: var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .scrolling-cards__right {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+  }
+
+  .scrolling-cards__demo {
+    perspective: 1000px;
+  }
+
+  .scrolling-cards__demo-window {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transform: rotateY(-5deg) rotateX(2deg);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .scrolling-cards__demo-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .scrolling-cards__demo-dots {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  .scrolling-cards__demo-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+  }
+
+  .scrolling-cards__demo-dots span:first-child { background: #ef4444; }
+  .scrolling-cards__demo-dots span:nth-child(2) { background: #eab308; }
+  .scrolling-cards__demo-dots span:last-child { background: #22c55e; }
+
+  .scrolling-cards__demo-title {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .scrolling-cards__demo-content {
+    display: grid;
+    grid-template-columns: 60px 1fr 180px;
+    min-height: 400px;
+  }
+
+  .scrolling-cards__demo-sidebar {
+    padding: var(--spacing-3);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .scrolling-cards__demo-sidebar-item {
+    height: 32px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+  }
+
+  .scrolling-cards__demo-sidebar-item.active {
+    background: var(--color-accent);
+    opacity: 0.3;
+  }
+
+  .scrolling-cards__demo-main {
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .scrolling-cards__demo-toolbar {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  .scrolling-cards__demo-tool {
+    width: 32px;
+    height: 32px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+  }
+
+  .scrolling-cards__demo-canvas {
+    flex: 1;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-4);
+  }
+
+  .scrolling-cards__demo-component--table {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+  }
+
+  .scrolling-cards__demo-table-header,
+  .scrolling-cards__demo-table-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-2);
+  }
+
+  .scrolling-cards__demo-table-header span,
+  .scrolling-cards__demo-table-row span {
+    height: 24px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+  }
+
+  .scrolling-cards__demo-table-header span {
+    background: var(--color-border);
+  }
+
+  .scrolling-cards__demo-chat {
+    border-left: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scrolling-cards__demo-chat-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .scrolling-cards__demo-chat-content {
+    flex: 1;
+    padding: var(--spacing-3);
+  }
+
+  .scrolling-cards__demo-chat-typing {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+  }
+
+  .scrolling-cards__demo-chat-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--color-accent);
+    margin-left: var(--spacing-1);
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  @media (max-width: 1024px) {
+    .scrolling-cards__container {
+      grid-template-columns: 1fr;
+    }
+
+    .scrolling-cards__title {
+      position: static;
+    }
+
+    .scrolling-cards__right {
+      position: static;
+      display: none;
+    }
+  }
+</style>

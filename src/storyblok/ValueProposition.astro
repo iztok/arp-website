@@ -1,0 +1,390 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface Props {
+  blok: {
+    headline?: string;
+    copy?: string;
+    primary_cta_text?: string;
+    primary_cta_link?: { url?: string; cached_url?: string };
+    secondary_cta_text?: string;
+    secondary_cta_link?: { url?: string; cached_url?: string };
+  };
+}
+
+const { blok } = Astro.props;
+const primaryHref = blok.primary_cta_link?.cached_url || blok.primary_cta_link?.url || '#';
+const secondaryHref = blok.secondary_cta_link?.cached_url || blok.secondary_cta_link?.url || '#';
+---
+
+<section class="value-prop" {...storyblokEditable(blok)}>
+  <div class="value-prop__container">
+    <div class="value-prop__content">
+      {blok.headline && <h2 class="value-prop__headline">{blok.headline}</h2>}
+      {blok.copy && <p class="value-prop__copy">{blok.copy}</p>}
+
+      <div class="value-prop__ctas">
+        {blok.secondary_cta_text && (
+          <a href={secondaryHref} class="btn btn--outline">{blok.secondary_cta_text}</a>
+        )}
+        {blok.primary_cta_text && (
+          <a href={primaryHref} class="btn btn--primary">{blok.primary_cta_text}</a>
+        )}
+      </div>
+    </div>
+
+    <div class="value-prop__visual">
+      <div class="value-prop__mockup">
+        <div class="value-prop__dashboard">
+          <div class="value-prop__dashboard-header">
+            <div class="value-prop__dashboard-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <span class="value-prop__dashboard-title">AgileRP Dashboard</span>
+          </div>
+          <div class="value-prop__dashboard-body">
+            <div class="value-prop__dashboard-sidebar">
+              <div class="value-prop__sidebar-item active"></div>
+              <div class="value-prop__sidebar-item"></div>
+              <div class="value-prop__sidebar-item"></div>
+              <div class="value-prop__sidebar-item"></div>
+            </div>
+            <div class="value-prop__dashboard-main">
+              <div class="value-prop__widget value-prop__widget--large">
+                <div class="value-prop__widget-header"></div>
+                <div class="value-prop__widget-chart">
+                  <div class="value-prop__chart-bar" style="height: 60%"></div>
+                  <div class="value-prop__chart-bar" style="height: 80%"></div>
+                  <div class="value-prop__chart-bar" style="height: 45%"></div>
+                  <div class="value-prop__chart-bar" style="height: 90%"></div>
+                  <div class="value-prop__chart-bar" style="height: 70%"></div>
+                </div>
+              </div>
+              <div class="value-prop__widget-row">
+                <div class="value-prop__widget value-prop__widget--small">
+                  <div class="value-prop__widget-number">$2.4M</div>
+                  <div class="value-prop__widget-label"></div>
+                </div>
+                <div class="value-prop__widget value-prop__widget--small">
+                  <div class="value-prop__widget-number">1,247</div>
+                  <div class="value-prop__widget-label"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="value-prop__chat-panel">
+          <div class="value-prop__chat-header">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L9 9L2 12L9 15L12 22L15 15L22 12L15 9L12 2Z"/>
+            </svg>
+            <span>AI Assistant</span>
+          </div>
+          <div class="value-prop__chat-messages">
+            <div class="value-prop__chat-message value-prop__chat-message--user">
+              Add a filter for date range
+            </div>
+            <div class="value-prop__chat-message value-prop__chat-message--ai">
+              I've added a date range filter to the inventory table...
+            </div>
+          </div>
+        </div>
+
+        <div class="value-prop__server-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="3" width="20" height="6" rx="1"/>
+            <rect x="2" y="10" width="20" height="6" rx="1"/>
+            <rect x="2" y="17" width="20" height="4" rx="1"/>
+            <circle cx="6" cy="6" r="1" fill="currentColor"/>
+            <circle cx="6" cy="13" r="1" fill="currentColor"/>
+            <circle cx="6" cy="19" r="1" fill="currentColor"/>
+          </svg>
+          <span>Your Server</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .value-prop {
+    padding: var(--spacing-24) 0;
+  }
+
+  .value-prop__container {
+    max-width: var(--max-width-wide);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-16);
+    align-items: center;
+  }
+
+  .value-prop__content {
+    max-width: 500px;
+  }
+
+  .value-prop__headline {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .value-prop__copy {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .value-prop__ctas {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+  }
+
+  .value-prop__visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .value-prop__mockup {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    perspective: 1000px;
+  }
+
+  .value-prop__dashboard {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transform: rotateY(-5deg) rotateX(5deg);
+    box-shadow: var(--shadow-xl);
+  }
+
+  .value-prop__dashboard-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .value-prop__dashboard-dots {
+    display: flex;
+    gap: var(--spacing-2);
+  }
+
+  .value-prop__dashboard-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-border-light);
+  }
+
+  .value-prop__dashboard-dots span:first-child { background: #ef4444; }
+  .value-prop__dashboard-dots span:nth-child(2) { background: #eab308; }
+  .value-prop__dashboard-dots span:last-child { background: #22c55e; }
+
+  .value-prop__dashboard-title {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .value-prop__dashboard-body {
+    display: flex;
+    min-height: 250px;
+  }
+
+  .value-prop__dashboard-sidebar {
+    width: 60px;
+    padding: var(--spacing-3);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .value-prop__sidebar-item {
+    height: 32px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+  }
+
+  .value-prop__sidebar-item.active {
+    background: var(--color-accent);
+    opacity: 0.3;
+  }
+
+  .value-prop__dashboard-main {
+    flex: 1;
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .value-prop__widget {
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-4);
+  }
+
+  .value-prop__widget--large {
+    flex: 1;
+  }
+
+  .value-prop__widget-header {
+    height: 12px;
+    width: 60%;
+    background: var(--color-border);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .value-prop__widget-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-2);
+    height: 80px;
+  }
+
+  .value-prop__chart-bar {
+    flex: 1;
+    background: linear-gradient(to top, var(--color-accent), transparent);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    opacity: 0.6;
+  }
+
+  .value-prop__widget-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .value-prop__widget--small {
+    text-align: center;
+  }
+
+  .value-prop__widget-number {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .value-prop__widget-label {
+    height: 8px;
+    width: 70%;
+    margin: var(--spacing-2) auto 0;
+    background: var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  .value-prop__chat-panel {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 220px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .value-prop__chat-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    padding: var(--spacing-3);
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--font-size-xs);
+    color: var(--color-accent);
+  }
+
+  .value-prop__chat-messages {
+    padding: var(--spacing-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .value-prop__chat-message {
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-normal);
+  }
+
+  .value-prop__chat-message--user {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    align-self: flex-end;
+  }
+
+  .value-prop__chat-message--ai {
+    background: rgba(94, 234, 212, 0.15);
+    color: var(--color-accent);
+    align-self: flex-start;
+  }
+
+  .value-prop__server-icon {
+    position: absolute;
+    left: -30px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--color-text-muted);
+  }
+
+  .value-prop__server-icon span {
+    font-size: var(--font-size-xs);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 1024px) {
+    .value-prop__container {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-12);
+    }
+
+    .value-prop__content {
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .value-prop__ctas {
+      justify-content: center;
+    }
+
+    .value-prop__chat-panel,
+    .value-prop__server-icon {
+      display: none;
+    }
+
+    .value-prop__dashboard {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .value-prop__headline {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>

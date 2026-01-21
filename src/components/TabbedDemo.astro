@@ -1,0 +1,475 @@
+---
+interface Tab {
+  id: string;
+  label: string;
+  headline: string;
+  copy: string;
+}
+
+interface Props {
+  sectionTitle?: string;
+  sectionCopy?: string;
+  tabs?: Tab[];
+}
+
+const {
+  sectionTitle = 'All the ways you work, in one place',
+  sectionCopy = 'Skip the handoffs between prompting, designing, and coding. AgileRP unifies AI assistance, visual building, and code editing so you can turn ideas into software without breaking your flow.',
+  tabs = [
+    {
+      id: 'chat',
+      label: 'Chat',
+      headline: 'Go from conversation to working code',
+      copy: 'Describe what you need in plain language. Our AI understands Laravel and Filament, generating code that fits established patterns—not random snippets.',
+    },
+    {
+      id: 'visual',
+      label: 'Visual Builder',
+      headline: 'Design interfaces without code',
+      copy: "Filament's admin panel gives you a powerful visual foundation. Customize layouts, forms, and dashboards with a builder designed for business applications.",
+    },
+    {
+      id: 'code',
+      label: 'Code',
+      headline: 'Full access when you need it',
+      copy: "It's your code. Edit it directly in your IDE, version it with Git, deploy it how you want. No proprietary formats, no export limitations.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="tabbed-demo">
+  <div class="tabbed-demo__container">
+    <div class="tabbed-demo__header">
+      <h2 class="tabbed-demo__title">{sectionTitle}</h2>
+      <p class="tabbed-demo__copy">{sectionCopy}</p>
+    </div>
+
+    <div class="tabbed-demo__tabs-wrapper">
+      <div class="tabbed-demo__tabs" role="tablist">
+        {tabs.map((tab, index) => (
+          <button
+            class:list={['tabbed-demo__tab', { active: index === 0 }]}
+            role="tab"
+            data-tab={tab.id}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="tabbed-demo__panels">
+        {tabs.map((tab, index) => (
+          <div
+            class:list={['tabbed-demo__panel', { active: index === 0 }]}
+            role="tabpanel"
+            data-panel={tab.id}
+          >
+            <div class="tabbed-demo__panel-content">
+              <h3 class="tabbed-demo__panel-headline">{tab.headline}</h3>
+              <p class="tabbed-demo__panel-copy">{tab.copy}</p>
+            </div>
+            <div class="tabbed-demo__panel-visual">
+              {tab.id === 'chat' && (
+                <div class="tabbed-demo__chat-demo">
+                  <div class="tabbed-demo__chat-message tabbed-demo__chat-message--user">
+                    Create a customer list with filters for status and date
+                  </div>
+                  <div class="tabbed-demo__chat-message tabbed-demo__chat-message--ai">
+                    <div class="tabbed-demo__chat-ai-header">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2L9 9L2 12L9 15L12 22L15 15L22 12L15 9L12 2Z"/>
+                      </svg>
+                      Creating CustomerResource with filters...
+                    </div>
+                    <pre class="tabbed-demo__chat-code"><code>class CustomerResource extends Resource
+{`{`}
+    protected static ?string $model = Customer::class;
+
+    public static function table(Table $table): Table
+    {`{`}
+        return $table
+            ->columns([...])
+            ->filters([
+                SelectFilter::make('status'),
+                DateFilter::make('created_at'),
+            ]);
+    {`}`}
+{`}`}</code></pre>
+                  </div>
+                </div>
+              )}
+              {tab.id === 'visual' && (
+                <div class="tabbed-demo__visual-demo">
+                  <div class="tabbed-demo__visual-sidebar">
+                    <div class="tabbed-demo__visual-component">Table</div>
+                    <div class="tabbed-demo__visual-component">Form</div>
+                    <div class="tabbed-demo__visual-component">Chart</div>
+                    <div class="tabbed-demo__visual-component">Stats</div>
+                  </div>
+                  <div class="tabbed-demo__visual-canvas">
+                    <div class="tabbed-demo__visual-widget tabbed-demo__visual-widget--stats">
+                      <div class="tabbed-demo__visual-stat">
+                        <span class="tabbed-demo__visual-stat-value">$124K</span>
+                        <span class="tabbed-demo__visual-stat-label">Revenue</span>
+                      </div>
+                      <div class="tabbed-demo__visual-stat">
+                        <span class="tabbed-demo__visual-stat-value">847</span>
+                        <span class="tabbed-demo__visual-stat-label">Orders</span>
+                      </div>
+                    </div>
+                    <div class="tabbed-demo__visual-widget tabbed-demo__visual-widget--table">
+                      <div class="tabbed-demo__visual-table-row"></div>
+                      <div class="tabbed-demo__visual-table-row"></div>
+                      <div class="tabbed-demo__visual-table-row"></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {tab.id === 'code' && (
+                <div class="tabbed-demo__code-demo">
+                  <div class="tabbed-demo__code-header">
+                    <span class="tabbed-demo__code-filename">CustomerResource.php</span>
+                    <div class="tabbed-demo__code-actions">
+                      <span>Git</span>
+                      <span>Deploy</span>
+                    </div>
+                  </div>
+                  <pre class="tabbed-demo__code-content"><code><span class="tabbed-demo__code-keyword">namespace</span> App\Filament\Resources;
+
+<span class="tabbed-demo__code-keyword">use</span> Filament\Resources\Resource;
+<span class="tabbed-demo__code-keyword">use</span> App\Models\Customer;
+
+<span class="tabbed-demo__code-keyword">class</span> <span class="tabbed-demo__code-class">CustomerResource</span> <span class="tabbed-demo__code-keyword">extends</span> Resource
+{`{`}
+    <span class="tabbed-demo__code-keyword">protected static</span> ?string <span class="tabbed-demo__code-var">$model</span> = Customer::class;
+
+    <span class="tabbed-demo__code-comment">// Your code, your rules</span>
+    <span class="tabbed-demo__code-keyword">public static function</span> <span class="tabbed-demo__code-func">form</span>(Form $form): Form
+    {`{`}
+        <span class="tabbed-demo__code-keyword">return</span> $form->schema([
+            TextInput::make(<span class="tabbed-demo__code-string">'name'</span>)->required(),
+            TextInput::make(<span class="tabbed-demo__code-string">'email'</span>)->email(),
+        ]);
+    {`}`}
+{`}`}</code></pre>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .tabbed-demo {
+    padding: var(--spacing-24) 0;
+    background: var(--color-bg-secondary);
+  }
+
+  .tabbed-demo__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .tabbed-demo__header {
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+  }
+
+  .tabbed-demo__title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .tabbed-demo__copy {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .tabbed-demo__tabs-wrapper {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .tabbed-demo__tabs {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tabbed-demo__tab {
+    flex: 1;
+    padding: var(--spacing-4) var(--spacing-6);
+    background: transparent;
+    border: none;
+    font-family: var(--font-family);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+  }
+
+  .tabbed-demo__tab:hover {
+    color: var(--color-text-primary);
+    background: var(--color-bg-secondary);
+  }
+
+  .tabbed-demo__tab.active {
+    color: var(--color-accent);
+    background: var(--color-bg-secondary);
+  }
+
+  .tabbed-demo__tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-accent);
+  }
+
+  .tabbed-demo__panel {
+    display: none;
+  }
+
+  .tabbed-demo__panel.active {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-8);
+    padding: var(--spacing-8);
+  }
+
+  .tabbed-demo__panel-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .tabbed-demo__panel-headline {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .tabbed-demo__panel-copy {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .tabbed-demo__panel-visual {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  /* Chat Demo */
+  .tabbed-demo__chat-demo {
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .tabbed-demo__chat-message {
+    padding: var(--spacing-3) var(--spacing-4);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+  }
+
+  .tabbed-demo__chat-message--user {
+    background: var(--color-bg-tertiary);
+    align-self: flex-end;
+    max-width: 80%;
+  }
+
+  .tabbed-demo__chat-message--ai {
+    background: rgba(94, 234, 212, 0.1);
+    border: 1px solid rgba(94, 234, 212, 0.2);
+  }
+
+  .tabbed-demo__chat-ai-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-3);
+  }
+
+  .tabbed-demo__chat-code {
+    background: var(--color-bg-primary);
+    padding: var(--spacing-3);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  /* Visual Demo */
+  .tabbed-demo__visual-demo {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    min-height: 250px;
+  }
+
+  .tabbed-demo__visual-sidebar {
+    padding: var(--spacing-3);
+    border-right: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .tabbed-demo__visual-component {
+    padding: var(--spacing-2);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-align: center;
+    cursor: grab;
+  }
+
+  .tabbed-demo__visual-canvas {
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .tabbed-demo__visual-widget {
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-4);
+  }
+
+  .tabbed-demo__visual-widget--stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .tabbed-demo__visual-stat {
+    text-align: center;
+  }
+
+  .tabbed-demo__visual-stat-value {
+    display: block;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .tabbed-demo__visual-stat-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .tabbed-demo__visual-table-row {
+    height: 24px;
+    background: var(--color-bg-primary);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-2);
+  }
+
+  /* Code Demo */
+  .tabbed-demo__code-demo {
+    font-family: var(--font-family-mono);
+  }
+
+  .tabbed-demo__code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-3) var(--spacing-4);
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tabbed-demo__code-filename {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+  }
+
+  .tabbed-demo__code-actions {
+    display: flex;
+    gap: var(--spacing-3);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .tabbed-demo__code-content {
+    padding: var(--spacing-4);
+    font-size: var(--font-size-xs);
+    line-height: 1.6;
+    overflow-x: auto;
+    margin: 0;
+  }
+
+  .tabbed-demo__code-keyword { color: #c678dd; }
+  .tabbed-demo__code-class { color: #e5c07b; }
+  .tabbed-demo__code-var { color: #e06c75; }
+  .tabbed-demo__code-func { color: #61afef; }
+  .tabbed-demo__code-string { color: #98c379; }
+  .tabbed-demo__code-comment { color: #5c6370; }
+
+  @media (max-width: 768px) {
+    .tabbed-demo__panel.active {
+      grid-template-columns: 1fr;
+    }
+
+    .tabbed-demo__tabs {
+      overflow-x: auto;
+    }
+
+    .tabbed-demo__tab {
+      white-space: nowrap;
+    }
+  }
+</style>
+
+<script>
+  const tabs = document.querySelectorAll('.tabbed-demo__tab');
+  const panels = document.querySelectorAll('.tabbed-demo__panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetId = tab.getAttribute('data-tab');
+
+      // Update tabs
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+
+      // Update panels
+      panels.forEach(panel => {
+        panel.classList.remove('active');
+        if (panel.getAttribute('data-panel') === targetId) {
+          panel.classList.add('active');
+        }
+      });
+    });
+  });
+</script>

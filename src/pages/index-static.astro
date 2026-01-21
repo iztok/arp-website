@@ -1,0 +1,259 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import LogoBar from '../components/LogoBar.astro';
+import ValueProposition from '../components/ValueProposition.astro';
+import ScrollingCards from '../components/ScrollingCards.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import TabbedDemo from '../components/TabbedDemo.astro';
+import ComparisonSection from '../components/ComparisonSection.astro';
+import StatsGrid from '../components/StatsGrid.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import BlogPreview from '../components/BlogPreview.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="AgileRP - Build internal software you own"
+  description="Internal business software you actually own. Not another subscription. Not vendor lock-in. Your code, your servers, your data—forever."
+>
+  <Header />
+
+  <!-- Section 1: Hero -->
+  <Hero
+    eyebrow="OPEN SOURCE · Software you own, forever."
+    phrases={[
+      { useCase: 'CRM that tracks client relationships', infrastructure: 'own servers' },
+      { useCase: 'inventory system with real-time alerts', infrastructure: 'company database' },
+      { useCase: 'project tracker with AI insights', infrastructure: 'existing infrastructure' },
+    ]}
+    supportingText="Internal business software you actually own. Not another subscription. Not vendor lock-in. Your code, your servers, your data—forever."
+    ctaText="Start Building"
+    ctaHref="/start"
+  />
+
+  <!-- Section 2: Logo Bar -->
+  <LogoBar
+    headline="Built for businesses who want to own their software"
+    badges={[
+      { label: 'Self-Hosted' },
+      { label: 'GDPR Ready' },
+      { label: 'SOC2 Compatible' },
+      { label: 'Open Source' },
+    ]}
+    note="Trusted by forward-thinking operations teams"
+  />
+
+  <!-- Section 3: Core Value Proposition -->
+  <ValueProposition
+    headline="Build internal software that lasts"
+    copy="From first conversation to production deployment, create applications that work with your data, on your infrastructure, under your control. No monthly fees. No vendor lock-in. No AI slop."
+    primaryCtaText="View the code"
+    primaryCtaHref="https://github.com/agilerp"
+    secondaryCtaText="Book a demo"
+    secondaryCtaHref="/demo"
+  />
+
+  <!-- Section 4: Platform for Every Use Case -->
+  <ScrollingCards
+    sectionTitle="The development platform for every use case"
+    cards={[
+      {
+        category: 'Operations Teams',
+        icon: 'gears',
+        headline: "Build the tools spreadsheets can't handle",
+        copy: 'From inventory tracking to approval workflows, create purpose-built software that your team actually uses—without waiting for IT.',
+        tagLabel: 'CONNECT YOUR SYSTEMS',
+        tagIcons: ['postgresql', 'mysql', 'api'],
+      },
+      {
+        category: 'Finance & Admin',
+        icon: 'calculator',
+        headline: 'Replace fragile spreadsheets with real applications',
+        copy: 'Build invoice systems, expense trackers, and reporting dashboards that connect to your actual business data.',
+        tagLabel: 'USE YOUR DATA',
+        tagIcons: ['database', 'chart'],
+      },
+      {
+        category: 'Growing Companies',
+        icon: 'building',
+        headline: 'Skip the SaaS treadmill',
+        copy: "Stop paying monthly for software you'll outgrow. Build exactly what you need, own it forever, and evolve it as you scale.",
+        tagLabel: 'OWN YOUR STACK',
+        tagIcons: ['laravel', 'filament', 'code'],
+      },
+    ]}
+  />
+
+  <!-- Section 5: Feature Grid -->
+  <FeatureGrid
+    headline="Software that lasts, not AI slop"
+    features={[
+      {
+        icon: 'code',
+        headline: 'Structured, not chaotic',
+        copy: "AI generates code within Laravel's proven patterns. No spaghetti code, no unmaintainable mess. Frameworks exist for a reason.",
+      },
+      {
+        icon: 'connection',
+        headline: 'Connect to everything you have',
+        copy: "Your databases, your APIs, your systems. AgileRP connects to your existing infrastructure—it doesn't try to replace it.",
+      },
+      {
+        icon: 'ai',
+        headline: 'AI that assists, humans who decide',
+        copy: 'AI agents handle routine tasks. Experienced architects design the system. You get speed without sacrificing quality.',
+      },
+      {
+        icon: 'dev',
+        headline: 'Built on Laravel + Filament',
+        copy: 'Industry-standard foundations that developers know and love. No proprietary lock-in. Real code you can read, modify, and own.',
+      },
+      {
+        icon: 'shield',
+        headline: 'Self-hosted by default',
+        copy: 'Run on your servers, your cloud, your terms. Your data never touches our servers unless you want it to.',
+      },
+      {
+        icon: 'opensource',
+        headline: 'Open source, always',
+        copy: 'The framework is MIT licensed. Fork it, extend it, audit it. No black boxes, no "trust us"—see exactly what you\'re running.',
+      },
+    ]}
+  />
+
+  <!-- Section 6: Three Ways to Build -->
+  <TabbedDemo
+    sectionTitle="All the ways you work, in one place"
+    sectionCopy="Skip the handoffs between prompting, designing, and coding. AgileRP unifies AI assistance, visual building, and code editing so you can turn ideas into software without breaking your flow."
+    tabs={[
+      {
+        id: 'chat',
+        label: 'Chat',
+        headline: 'Go from conversation to working code',
+        copy: 'Describe what you need in plain language. Our AI understands Laravel and Filament, generating code that fits established patterns—not random snippets.',
+      },
+      {
+        id: 'visual',
+        label: 'Visual Builder',
+        headline: 'Design interfaces without code',
+        copy: "Filament's admin panel gives you a powerful visual foundation. Customize layouts, forms, and dashboards with a builder designed for business applications.",
+      },
+      {
+        id: 'code',
+        label: 'Code',
+        headline: 'Full access when you need it',
+        copy: "It's your code. Edit it directly in your IDE, version it with Git, deploy it how you want. No proprietary formats, no export limitations.",
+      },
+    ]}
+  />
+
+  <!-- Section 7: Anti-Cloud Manifesto -->
+  <ComparisonSection
+    headline="Why we don't do SaaS"
+    leftTitle="The SaaS Problem"
+    leftItems={[
+      'Monthly fees that compound forever',
+      "Your data on someone else's servers",
+      "Features you don't need, missing ones you do",
+      'Vendor gets acquired, your software disappears',
+      'Export? Good luck with that proprietary format',
+    ]}
+    rightTitle="The AgileRP Alternative"
+    rightItems={[
+      'One-time implementation, ongoing ownership',
+      'Your infrastructure, your rules',
+      'Built exactly for your needs, nothing more',
+      "You own the code—it's yours forever",
+      'Standard Laravel/PHP—any developer can work on it',
+    ]}
+    ctaText="Read our Anti-Cloud Manifesto"
+    ctaHref="/manifesto"
+  />
+
+  <!-- Section 8: Customer Results -->
+  <StatsGrid
+    headline="Results from businesses who chose ownership"
+    stats={[
+      {
+        value: '€240K',
+        label: 'saved over 3 years vs. SaaS alternatives',
+        company: 'Operations Firm',
+      },
+      {
+        value: '4 weeks',
+        label: 'from first call to production',
+        company: 'Manufacturing Company',
+      },
+      {
+        value: '100%',
+        label: 'code ownership with full capability transfer',
+        company: 'Professional Services',
+      },
+      {
+        value: '€0',
+        label: 'monthly software fees',
+        company: 'Growing Startup',
+      },
+    ]}
+  />
+
+  <!-- Section 9: How We Work Together -->
+  <ProcessSteps
+    headline="Implementation, not just software"
+    supportingMessage="We're not selling you software. We're building your capability."
+    steps={[
+      {
+        number: '01',
+        title: 'Discover',
+        description: 'We understand your processes, data, and team. No generic demos—real conversations about what you need.',
+      },
+      {
+        number: '02',
+        title: 'Build',
+        description: 'Our architects design and AI accelerates. You see progress weekly, provide feedback continuously.',
+      },
+      {
+        number: '03',
+        title: 'Own',
+        description: 'Deployed on your infrastructure. Full code handover. Training for your team. Ongoing support if you want it.',
+      },
+    ]}
+  />
+
+  <!-- Section 10: Blog Preview -->
+  <BlogPreview
+    headline="Perspectives on ownership-first software"
+    posts={[
+      {
+        title: 'Why vibe coding produces unmaintainable software',
+        href: '/blog/vibe-coding',
+        category: 'Engineering',
+      },
+      {
+        title: 'The true cost of SaaS over 5 years',
+        href: '/blog/saas-cost',
+        category: 'Business',
+      },
+      {
+        title: 'Laravel + AI: How frameworks constrain chaos',
+        href: '/blog/laravel-ai',
+        category: 'Technology',
+      },
+    ]}
+  />
+
+  <!-- Section 11: Final CTA -->
+  <FinalCTA
+    headline="It's your turn to own"
+    subheadline="Stop renting software. Start building assets."
+    primaryCtaText="Book a Discovery Call"
+    primaryCtaHref="/demo"
+    secondaryCtaText="Explore on GitHub"
+    secondaryCtaHref="https://github.com/agilerp"
+  />
+
+  <Footer />
+</BaseLayout>

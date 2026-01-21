@@ -1,0 +1,192 @@
+---
+interface BlogPost {
+  title: string;
+  href: string;
+  category?: string;
+}
+
+interface Props {
+  headline?: string;
+  posts?: BlogPost[];
+}
+
+const {
+  headline = 'Perspectives on ownership-first software',
+  posts = [
+    {
+      title: 'Why vibe coding produces unmaintainable software',
+      href: '/blog/vibe-coding',
+      category: 'Engineering',
+    },
+    {
+      title: 'The true cost of SaaS over 5 years',
+      href: '/blog/saas-cost',
+      category: 'Business',
+    },
+    {
+      title: 'Laravel + AI: How frameworks constrain chaos',
+      href: '/blog/laravel-ai',
+      category: 'Technology',
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="blog-preview">
+  <div class="blog-preview__container">
+    <h2 class="blog-preview__headline">{headline}</h2>
+
+    <div class="blog-preview__grid">
+      {posts.map((post) => (
+        <a href={post.href} class="blog-preview__card">
+          <div class="blog-preview__card-image">
+            <div class="blog-preview__card-illustration">
+              <svg viewBox="0 0 200 150" fill="none">
+                <rect width="200" height="150" fill="var(--color-bg-tertiary)"/>
+                <rect x="40" y="30" width="60" height="90" rx="4" fill="var(--color-accent)" opacity="0.2"/>
+                <rect x="50" y="40" width="40" height="60" rx="2" fill="var(--color-accent)" opacity="0.3"/>
+                <rect x="110" y="50" width="50" height="50" rx="4" fill="var(--color-border-light)"/>
+                <rect x="120" y="60" width="30" height="4" rx="1" fill="var(--color-bg-primary)"/>
+                <rect x="120" y="70" width="20" height="4" rx="1" fill="var(--color-bg-primary)"/>
+              </svg>
+            </div>
+          </div>
+          <div class="blog-preview__card-content">
+            {post.category && (
+              <span class="blog-preview__card-category">{post.category}</span>
+            )}
+            <h3 class="blog-preview__card-title">{post.title}</h3>
+            <span class="blog-preview__card-link">
+              Read more
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .blog-preview {
+    padding: var(--spacing-24) 0;
+  }
+
+  .blog-preview__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .blog-preview__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+  }
+
+  .blog-preview__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+  }
+
+  .blog-preview__card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    text-decoration: none;
+    transition: border-color var(--transition-fast), transform var(--transition-fast);
+  }
+
+  .blog-preview__card:hover {
+    border-color: var(--color-border-light);
+    transform: translateY(-4px);
+  }
+
+  .blog-preview__card-image {
+    aspect-ratio: 16 / 10;
+    background: var(--color-bg-tertiary);
+    overflow: hidden;
+  }
+
+  .blog-preview__card-illustration {
+    width: 100%;
+    height: 100%;
+  }
+
+  .blog-preview__card-illustration svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .blog-preview__card-content {
+    padding: var(--spacing-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    flex: 1;
+  }
+
+  .blog-preview__card-category {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-accent);
+  }
+
+  .blog-preview__card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-snug);
+    flex: 1;
+  }
+
+  .blog-preview__card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast), gap var(--transition-fast);
+  }
+
+  .blog-preview__card:hover .blog-preview__card-link {
+    color: var(--color-accent);
+    gap: var(--spacing-3);
+  }
+
+  @media (max-width: 1024px) {
+    .blog-preview__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .blog-preview__card {
+      flex-direction: row;
+    }
+
+    .blog-preview__card-image {
+      width: 200px;
+      aspect-ratio: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .blog-preview__card {
+      flex-direction: column;
+    }
+
+    .blog-preview__card-image {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+    }
+  }
+</style>

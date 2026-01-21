@@ -1,0 +1,130 @@
+---
+interface Stat {
+  value: string;
+  label: string;
+  company: string;
+}
+
+interface Props {
+  headline?: string;
+  stats?: Stat[];
+}
+
+const {
+  headline = 'Results from businesses who chose ownership',
+  stats = [
+    {
+      value: '€240K',
+      label: 'saved over 3 years vs. SaaS alternatives',
+      company: 'Operations Firm',
+    },
+    {
+      value: '4 weeks',
+      label: 'from first call to production',
+      company: 'Manufacturing Company',
+    },
+    {
+      value: '100%',
+      label: 'code ownership with full capability transfer',
+      company: 'Professional Services',
+    },
+    {
+      value: '€0',
+      label: 'monthly software fees',
+      company: 'Growing Startup',
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="stats-grid">
+  <div class="stats-grid__container">
+    <h2 class="stats-grid__headline">{headline}</h2>
+
+    <div class="stats-grid__grid">
+      {stats.map((stat) => (
+        <div class="stats-grid__card">
+          <div class="stats-grid__value">{stat.value}</div>
+          <div class="stats-grid__label">{stat.label}</div>
+          <div class="stats-grid__company">{stat.company}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-grid {
+    padding: var(--spacing-24) 0;
+  }
+
+  .stats-grid__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .stats-grid__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+  }
+
+  .stats-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .stats-grid__card {
+    background: var(--color-bg-primary);
+    padding: var(--spacing-10);
+    text-align: center;
+    transition: background-color var(--transition-fast);
+  }
+
+  .stats-grid__card:hover {
+    background: var(--color-bg-secondary);
+  }
+
+  .stats-grid__value {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-light);
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-3);
+  }
+
+  .stats-grid__label {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-4);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .stats-grid__company {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .stats-grid__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid__value {
+      font-size: var(--font-size-4xl);
+    }
+
+    .stats-grid__card {
+      padding: var(--spacing-8);
+    }
+  }
+</style>

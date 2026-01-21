@@ -1,0 +1,166 @@
+---
+interface Feature {
+  icon: string;
+  headline: string;
+  copy: string;
+}
+
+interface Props {
+  headline?: string;
+  features?: Feature[];
+}
+
+const {
+  headline = 'Software that lasts, not AI slop',
+  features = [
+    {
+      icon: 'code',
+      headline: 'Structured, not chaotic',
+      copy: "AI generates code within Laravel's proven patterns. No spaghetti code, no unmaintainable mess. Frameworks exist for a reason.",
+    },
+    {
+      icon: 'connection',
+      headline: 'Connect to everything you have',
+      copy: "Your databases, your APIs, your systems. AgileRP connects to your existing infrastructure—it doesn't try to replace it.",
+    },
+    {
+      icon: 'ai',
+      headline: 'AI that assists, humans who decide',
+      copy: 'AI agents handle routine tasks. Experienced architects design the system. You get speed without sacrificing quality.',
+    },
+    {
+      icon: 'dev',
+      headline: 'Built on Laravel + Filament',
+      copy: 'Industry-standard foundations that developers know and love. No proprietary lock-in. Real code you can read, modify, and own.',
+    },
+    {
+      icon: 'shield',
+      headline: 'Self-hosted by default',
+      copy: 'Run on your servers, your cloud, your terms. Your data never touches our servers unless you want it to.',
+    },
+    {
+      icon: 'opensource',
+      headline: 'Open source, always',
+      copy: 'The framework is MIT licensed. Fork it, extend it, audit it. No black boxes, no "trust us"—see exactly what you\'re running.',
+    },
+  ],
+} = Astro.props;
+
+const iconMap: Record<string, string> = {
+  code: '<path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/>',
+  connection: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+  ai: '<path d="M12 2L9 9L2 12L9 15L12 22L15 15L22 12L15 9L12 2Z"/>',
+  dev: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  opensource: '<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+};
+---
+
+<section class="feature-grid">
+  <div class="feature-grid__container">
+    <h2 class="feature-grid__headline">{headline}</h2>
+
+    <div class="feature-grid__grid">
+      {features.map((feature) => (
+        <div class="feature-grid__card">
+          <div class="feature-grid__icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              set:html={iconMap[feature.icon] || iconMap.code}
+            />
+          </div>
+          <h3 class="feature-grid__card-headline">{feature.headline}</h3>
+          <p class="feature-grid__card-copy">{feature.copy}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-grid {
+    padding: var(--spacing-24) 0;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .feature-grid__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .feature-grid__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    text-align: center;
+    margin-bottom: var(--spacing-16);
+  }
+
+  .feature-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .feature-grid__card {
+    background-color: var(--color-bg-primary);
+    padding: var(--spacing-8);
+    transition: background-color var(--transition-fast);
+  }
+
+  .feature-grid__card:hover {
+    background-color: var(--color-bg-tertiary);
+  }
+
+  .feature-grid__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-4);
+    color: var(--color-accent);
+  }
+
+  .feature-grid__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .feature-grid__card-headline {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-3);
+  }
+
+  .feature-grid__card-copy {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (max-width: 1024px) {
+    .feature-grid__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .feature-grid__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-grid__headline {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>

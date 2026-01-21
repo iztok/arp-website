@@ -1,0 +1,98 @@
+---
+import { storyblokEditable, renderRichText } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+
+const isImageLeft = blok.layout === 'image_left';
+const renderedText = blok.text ? renderRichText(blok.text) : '';
+---
+
+<section class="image-text" {...storyblokEditable(blok)}>
+	<div class={`image-text__container ${isImageLeft ? 'image-text__container--image-left' : 'image-text__container--image-right'}`}>
+		<div class="image-text__image-wrapper">
+			{blok.image?.filename && (
+				<img
+					src={blok.image.filename}
+					alt={blok.image.alt || ''}
+					class="image-text__image"
+					loading="lazy"
+				/>
+			)}
+		</div>
+		<div class="image-text__content">
+			{blok.title && <h2 class="image-text__title">{blok.title}</h2>}
+			{renderedText && <div class="image-text__text" set:html={renderedText} />}
+		</div>
+	</div>
+</section>
+
+<style>
+	.image-text {
+		padding: 4rem 2rem;
+	}
+
+	.image-text__container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+		align-items: center;
+	}
+
+	.image-text__container--image-right {
+		flex-direction: row-reverse;
+	}
+
+	.image-text__image-wrapper {
+		flex: 1;
+		min-width: 300px;
+	}
+
+	.image-text__image {
+		width: 100%;
+		height: auto;
+		border-radius: 8px;
+		object-fit: cover;
+	}
+
+	.image-text__content {
+		flex: 1;
+		min-width: 300px;
+	}
+
+	.image-text__title {
+		font-size: 2rem;
+		margin-bottom: 1rem;
+		line-height: 1.2;
+	}
+
+	.image-text__text {
+		font-size: 1.125rem;
+		line-height: 1.7;
+		color: #444;
+	}
+
+	.image-text__text :global(p) {
+		margin-bottom: 1rem;
+	}
+
+	.image-text__text :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	@media (max-width: 768px) {
+		.image-text {
+			padding: 2rem 1rem;
+		}
+
+		.image-text__container,
+		.image-text__container--image-right {
+			flex-direction: column;
+		}
+
+		.image-text__title {
+			font-size: 1.5rem;
+		}
+	}
+</style>

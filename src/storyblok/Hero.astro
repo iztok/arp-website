@@ -1,0 +1,266 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+interface HeroPhrase {
+  use_case: string;
+  infrastructure: string;
+}
+
+interface Props {
+  blok: {
+    eyebrow?: string;
+    phrases?: HeroPhrase[];
+    supporting_text?: string;
+    cta_text?: string;
+    cta_link?: { url?: string; cached_url?: string };
+  };
+}
+
+const { blok } = Astro.props;
+const ctaHref = blok.cta_link?.cached_url || blok.cta_link?.url || '/start';
+const phrases = blok.phrases || [];
+---
+
+<section class="hero" {...storyblokEditable(blok)}>
+  <div class="hero__bg-lines" aria-hidden="true">
+    {Array.from({ length: 8 }).map((_, i) => (
+      <div class="hero__bg-line" />
+    ))}
+  </div>
+
+  <div class="hero__container">
+    {blok.eyebrow && <div class="hero__eyebrow">{blok.eyebrow}</div>}
+
+    <h1 class="hero__headline">
+      <span class="hero__headline-static">Build me a </span>
+      <span class="hero__headline-dynamic">
+        <span class="hero__typewriter-usecase highlight" data-phrases={JSON.stringify(phrases.map(p => p.use_case))}>
+          {phrases[0]?.use_case || 'custom application'}
+        </span>
+      </span>
+      <span class="hero__headline-static"> using my </span>
+      <span class="hero__headline-dynamic">
+        <span class="hero__typewriter-infra highlight" data-phrases={JSON.stringify(phrases.map(p => p.infrastructure))}>
+          {phrases[0]?.infrastructure || 'own servers'}
+        </span>
+      </span>
+    </h1>
+
+    {blok.supporting_text && <p class="hero__supporting-text">{blok.supporting_text}</p>}
+
+    <div class="hero__cta-wrapper">
+      <div class="hero__icons">
+        <div class="hero__icon" title="Laravel">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M23.642 5.43a.364.364 0 01.014.1v5.149c0 .135-.073.26-.189.326l-4.323 2.49v4.934a.378.378 0 01-.188.326L9.93 23.949a.316.316 0 01-.066.027c-.008.002-.016.008-.024.01a.348.348 0 01-.192 0c-.011-.002-.02-.008-.03-.012-.02-.006-.043-.012-.063-.025L.533 18.755a.376.376 0 01-.189-.326V2.974c0-.033.005-.066.014-.098.003-.012.01-.02.014-.032a.369.369 0 01.023-.058c.004-.013.015-.022.023-.033l.033-.045c.012-.01.025-.018.037-.027.014-.012.027-.024.041-.034h.001L5.044.05a.375.375 0 01.378 0L9.936 2.647h.002c.015.01.027.021.04.033l.038.027c.013.014.02.03.033.045.008.011.02.021.025.033.01.02.017.038.024.058.003.011.01.021.013.032.01.031.014.064.014.098v9.652l3.76-2.164V5.527c0-.033.004-.066.013-.098.003-.01.01-.02.013-.032a.487.487 0 01.024-.059c.007-.012.018-.02.025-.033.012-.015.021-.03.033-.043.012-.012.025-.02.037-.028.014-.01.026-.023.041-.032h.001l4.513-2.598a.375.375 0 01.38 0l4.513 2.598c.016.01.027.021.042.031.012.01.025.018.036.028.013.014.022.03.034.044.008.012.019.021.024.033.011.02.018.04.024.06.006.01.012.021.015.032zm-.74 5.032V6.179l-1.578.908-2.182 1.256v4.283zm-4.514 7.75v-4.287l-2.147 1.225-6.126 3.498v4.325zM1.094 3.622v14.588l8.273 4.761v-4.325l-4.322-2.445-.002-.003-.002-.002c-.014-.01-.025-.021-.04-.031-.011-.01-.024-.018-.035-.027l-.001-.002c-.013-.012-.021-.025-.031-.04-.01-.011-.021-.022-.028-.036h-.002c-.008-.014-.013-.031-.02-.047-.006-.016-.014-.027-.018-.043a.49.49 0 01-.008-.057c-.002-.014-.006-.027-.006-.041V5.789l-2.18-1.257zM5.23.81L1.47 2.974l3.76 2.164 3.758-2.164zm1.956 13.505l2.182-1.256V3.622l-1.58.91-2.182 1.255v9.435zm11.581-10.95l-3.76 2.163 3.76 2.163 3.759-2.164zm-.376 4.978L16.21 7.087l-1.58-.907v4.283l2.182 1.256 1.58.908zm-8.65 9.654l5.514-3.148 2.756-1.572-3.757-2.163-4.323 2.489-3.941 2.27z"/>
+          </svg>
+        </div>
+        <div class="hero__icon" title="Filament">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </div>
+        <div class="hero__icon" title="AI-Powered">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M12 2L9 9L2 12L9 15L12 22L15 15L22 12L15 9L12 2Z"/>
+          </svg>
+        </div>
+      </div>
+
+      <a href={ctaHref} class="btn btn--primary btn--large hero__cta">
+        {blok.cta_text || 'Start Building'}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-32) var(--spacing-6) var(--spacing-24);
+    overflow: hidden;
+  }
+
+  .hero__bg-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    pointer-events: none;
+    opacity: 0.15;
+  }
+
+  .hero__bg-line {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-border) 20%,
+      var(--color-border) 80%,
+      transparent 100%
+    );
+  }
+
+  .hero__container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero__eyebrow {
+    display: inline-block;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-8);
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+  }
+
+  .hero__headline {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-snug);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .hero__headline-static {
+    color: var(--color-text-secondary);
+  }
+
+  .hero__typewriter-usecase,
+  .hero__typewriter-infra {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+  }
+
+  .hero__supporting-text {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto var(--spacing-10);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .hero__cta-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-6);
+  }
+
+  .hero__icons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+  }
+
+  .hero__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+    transition: opacity var(--transition-fast);
+  }
+
+  .hero__icon:hover {
+    opacity: 1;
+  }
+
+  .hero__cta {
+    min-width: 200px;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--spacing-24) var(--spacing-4) var(--spacing-16);
+    }
+
+    .hero__headline {
+      font-size: 1.75rem;
+    }
+
+    .hero__supporting-text {
+      font-size: var(--font-size-base);
+    }
+  }
+</style>
+
+<script>
+  class Typewriter {
+    private element: HTMLElement;
+    private phrases: string[];
+    private currentIndex: number = 0;
+    private isDeleting: boolean = false;
+    private text: string = '';
+    private typeSpeed: number = 50;
+    private deleteSpeed: number = 30;
+    private pauseTime: number = 2000;
+
+    constructor(element: HTMLElement) {
+      this.element = element;
+      const phrasesAttr = element.getAttribute('data-phrases');
+      this.phrases = phrasesAttr ? JSON.parse(phrasesAttr) : [];
+      if (this.phrases.length === 0) return;
+      this.text = this.phrases[0] || '';
+      this.tick();
+    }
+
+    tick() {
+      if (this.phrases.length === 0) return;
+      const currentPhrase = this.phrases[this.currentIndex];
+
+      if (this.isDeleting) {
+        this.text = currentPhrase.substring(0, this.text.length - 1);
+      } else {
+        this.text = currentPhrase.substring(0, this.text.length + 1);
+      }
+
+      this.element.textContent = this.text;
+
+      let delta = this.isDeleting ? this.deleteSpeed : this.typeSpeed;
+
+      if (!this.isDeleting && this.text === currentPhrase) {
+        delta = this.pauseTime;
+        this.isDeleting = true;
+      } else if (this.isDeleting && this.text === '') {
+        this.isDeleting = false;
+        this.currentIndex = (this.currentIndex + 1) % this.phrases.length;
+        delta = 500;
+      }
+
+      setTimeout(() => this.tick(), delta);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const usecaseEl = document.querySelector('.hero__typewriter-usecase') as HTMLElement;
+    const infraEl = document.querySelector('.hero__typewriter-infra') as HTMLElement;
+
+    if (usecaseEl) new Typewriter(usecaseEl);
+    setTimeout(() => {
+      if (infraEl) new Typewriter(infraEl);
+    }, 500);
+  });
+</script>
