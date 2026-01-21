@@ -18,3 +18,29 @@ try {
 ---
 
 <StoryblokComponent blok={story.content} />
+
+<script define:vars={{ storyId: story.id }}>
+	// Enable live preview - reload page when content changes in editor
+	let debounceTimer;
+
+	window.storyblokRegisterEvent(() => {
+		const { StoryblokBridge } = window;
+		if (StoryblokBridge) {
+			const bridge = new StoryblokBridge();
+
+			// Debounced reload on input (as you type)
+			bridge.on('input', (event) => {
+				if (event.story.id === storyId) {
+					clearTimeout(debounceTimer);
+					debounceTimer = setTimeout(() => {
+						location.reload();
+					}, 300); // Reload 300ms after typing stops
+				}
+			});
+
+			// Immediate reload on publish/change
+			bridge.on('published', () => location.reload());
+			bridge.on('change', () => location.reload());
+		}
+	});
+</script>
