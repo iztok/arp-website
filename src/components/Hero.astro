@@ -15,9 +15,9 @@ interface Props {
 const {
   eyebrow = 'OPEN SOURCE · Software you own, forever.',
   phrases = [
-    { useCase: 'CRM that tracks client relationships', infrastructure: 'own servers' },
-    { useCase: 'inventory system with real-time alerts', infrastructure: 'company database' },
-    { useCase: 'project tracker with AI insights', infrastructure: 'existing infrastructure' },
+    { useCase: 'Project Management Software', infrastructure: 'Private Database' },
+    { useCase: 'Tailored CRM', infrastructure: 'Existing Infrastructure' },
+    { useCase: 'Inventory System', infrastructure: 'Company Servers' },
   ],
   supportingText = 'Internal business software you actually own. Not another subscription. Not vendor lock-in. Your code, your servers, your data—forever.',
   ctaText = 'Start Building',
@@ -38,16 +38,20 @@ const {
     <div class="hero__eyebrow">{eyebrow}</div>
 
     <h1 class="hero__headline">
-      <span class="hero__headline-static">Build me a </span>
-      <span class="hero__headline-dynamic">
-        <span class="hero__typewriter-usecase highlight" data-phrases={JSON.stringify(phrases.map(p => p.useCase))}>
-          {phrases[0].useCase}
+      <span class="hero__headline-line">
+        <span class="hero__headline-static">Your </span>
+        <span class="hero__headline-dynamic">
+          <span class="hero__typewriter-usecase highlight" data-phrases={JSON.stringify(phrases.map(p => p.useCase))}>
+            {phrases[0].useCase}
+          </span>
         </span>
       </span>
-      <span class="hero__headline-static"> using my </span>
-      <span class="hero__headline-dynamic">
-        <span class="hero__typewriter-infra highlight" data-phrases={JSON.stringify(phrases.map(p => p.infrastructure))}>
-          {phrases[0].infrastructure}
+      <span class="hero__headline-line">
+        <span class="hero__headline-static">using your </span>
+        <span class="hero__headline-dynamic">
+          <span class="hero__typewriter-infra highlight" data-phrases={JSON.stringify(phrases.map(p => p.infrastructure))}>
+            {phrases[0].infrastructure}
+          </span>
         </span>
       </span>
     </h1>
@@ -172,6 +176,15 @@ const {
     line-height: var(--line-height-snug);
     color: var(--color-text-primary);
     margin-bottom: var(--spacing-8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+  }
+
+  .hero__headline-line {
+    display: block;
+    white-space: nowrap;
   }
 
   .hero__headline-static {
@@ -179,7 +192,18 @@ const {
   }
 
   .hero__headline-dynamic {
-    display: inline;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .hero__typewriter-usecase {
+    display: inline-block;
+    min-width: 14ch;
+  }
+
+  .hero__typewriter-infra {
+    display: inline-block;
+    min-width: 12ch;
   }
 
   .hero__typewriter-usecase,
