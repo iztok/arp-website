@@ -16,72 +16,72 @@ import Footer from '../components/Footer.astro';
 ---
 
 <BaseLayout
-  title="Alodix - Build internal software you own"
-  description="Internal business software you actually own. Not another subscription. Not vendor lock-in. Your code, your servers, your data—forever."
+  title="Alodix - Custom software you own"
+  description="We build custom business software and deploy it on your infrastructure. You get the source code. No subscriptions, no lock-in."
 >
   <Header />
 
   <!-- Section 1: Hero -->
   <Hero
-    eyebrow="OPEN SOURCE · Software you own, forever."
+    eyebrow="We build it. You own it."
     phrases={[
-      { useCase: 'Project Management Software', infrastructure: 'Private Database' },
-      { useCase: 'Tailored CRM', infrastructure: 'Existing Infrastructure' },
-      { useCase: 'Inventory System', infrastructure: 'Company Servers' },
+      { useCase: 'CRM', infrastructure: 'your database' },
+      { useCase: 'Admin Panel', infrastructure: 'your servers' },
+      { useCase: 'Workflow System', infrastructure: 'your infrastructure' },
     ]}
-    supportingText="Internal business software you actually own. Not another subscription. Not vendor lock-in. Your code, your servers, your data—forever."
-    ctaText="Start Building"
-    ctaHref="/start"
+    supportingText="We build custom business software and deploy it on your infrastructure. You get the source code. No subscriptions, no lock-in."
+    ctaText="Book a Call"
+    ctaHref="/contact"
   />
 
   <!-- Section 2: Logo Bar -->
   <LogoBar
-    headline="Built for businesses who want to own their software"
+    headline="Software delivery, not SaaS"
     badges={[
-      { label: 'Self-Hosted' },
-      { label: 'GDPR Ready' },
-      { label: 'SOC2 Compatible' },
+      { label: 'Your Servers' },
+      { label: 'Your Code' },
+      { label: 'Full Handover' },
       { label: 'Open Source' },
     ]}
-    note="Trusted by forward-thinking operations teams"
+    note="For companies that want to own their tools"
   />
 
   <!-- Section 3: Core Value Proposition -->
   <ValueProposition
-    headline="Build internal software that lasts"
-    copy="From first conversation to production deployment, create applications that work with your data, on your infrastructure, under your control. No monthly fees. No vendor lock-in. No AI slop."
-    primaryCtaText="View the code"
+    headline="We build. You own."
+    copy="Tell us what you need. We design, build, and deploy it on your infrastructure. You get clean, documented source code and full ownership."
+    primaryCtaText="See our work"
     primaryCtaHref="https://github.com/alodix"
-    secondaryCtaText="Book a demo"
-    secondaryCtaHref="/demo"
+    secondaryCtaText="Book a call"
+    secondaryCtaHref="/contact"
   />
 
   <!-- Section 4: Platform for Every Use Case -->
   <ScrollingCards
-    sectionTitle="The development platform for every use case"
+    sectionTitle="What we build"
     cards={[
       {
-        category: 'Operations Teams',
+        category: 'Operations',
         icon: 'gears',
-        headline: "Build the tools spreadsheets can't handle",
-        copy: 'From inventory tracking to approval workflows, create purpose-built software that your team actually uses—without waiting for IT.',
-        tagLabel: 'CONNECT YOUR SYSTEMS',
+        headline: 'Internal tools that fit your process',
+        copy: 'Inventory systems, approval workflows, dashboards. Built around how your team actually works.',
+        tagLabel: 'YOUR SYSTEMS',
         tagIcons: ['postgresql', 'mysql', 'api'],
       },
       {
-        category: 'Finance & Admin',
+        category: 'Sales & Support',
         icon: 'calculator',
-        headline: 'Replace fragile spreadsheets with real applications',
-        copy: 'Build invoice systems, expense trackers, and reporting dashboards that connect to your actual business data.',
-        tagLabel: 'USE YOUR DATA',
+        headline: 'CRMs that match your business',
+        copy: 'Customer management, ticketing, reporting. Connected to your existing data sources.',
+        tagLabel: 'YOUR DATA',
         tagIcons: ['database', 'chart'],
       },
       {
-        category: 'Growing Companies',
+        category: 'Custom Software',
         icon: 'building',
-        headline: 'Skip the SaaS treadmill',
-        copy: "Stop paying monthly for software you'll outgrow. Build exactly what you need, own it forever, and evolve it as you scale.",
-        tagLabel: 'OWN YOUR STACK',
+        headline: 'Whatever you need',
+        copy: "If it can be built with Laravel, we can build it. And you'll own every line of code.",
+        tagLabel: 'YOUR CODE',
         tagIcons: ['laravel', 'filament', 'code'],
       },
     ]}
@@ -89,169 +89,174 @@ import Footer from '../components/Footer.astro';
 
   <!-- Section 5: Feature Grid -->
   <FeatureGrid
-    headline="Software that lasts, not AI slop"
+    headline="How we work"
     features={[
       {
         icon: 'code',
-        headline: 'Structured, not chaotic',
-        copy: "AI generates code within Laravel's proven patterns. No spaghetti code, no unmaintainable mess. Frameworks exist for a reason.",
+        headline: 'Clean, maintainable code',
+        copy: 'Laravel best practices. Well-documented. Any PHP developer can pick it up and extend it.',
       },
       {
         icon: 'connection',
-        headline: 'Connect to everything you have',
-        copy: "Your databases, your APIs, your systems. Alodix connects to your existing infrastructure—it doesn't try to replace it.",
+        headline: 'Works with what you have',
+        copy: 'We connect to your existing databases, APIs, and systems. No need to migrate anything.',
       },
       {
         icon: 'ai',
-        headline: 'AI that assists, humans who decide',
-        copy: 'AI agents handle routine tasks. Experienced architects design the system. You get speed without sacrificing quality.',
+        headline: 'AI-accelerated, human-reviewed',
+        copy: 'We use AI to move fast. Senior engineers review everything. You get quality at speed.',
       },
       {
         icon: 'dev',
-        headline: 'Built on Laravel + Filament',
-        copy: 'Industry-standard foundations that developers know and love. No proprietary lock-in. Real code you can read, modify, and own.',
+        headline: 'Laravel + Filament stack',
+        copy: 'Battle-tested tools with huge communities. Easy to find developers. Easy to maintain.',
       },
       {
         icon: 'shield',
-        headline: 'Self-hosted by default',
-        copy: 'Run on your servers, your cloud, your terms. Your data never touches our servers unless you want it to.',
+        headline: 'Runs on your servers',
+        copy: 'We deploy to your infrastructure. AWS, Azure, on-prem—wherever you need it.',
       },
       {
         icon: 'opensource',
-        headline: 'Open source, always',
-        copy: 'The framework is MIT licensed. Fork it, extend it, audit it. No black boxes, no "trust us"—see exactly what you\'re running.',
+        headline: 'No vendor lock-in',
+        copy: 'Standard PHP/Laravel. Your team or any agency can maintain and extend it.',
       },
     ]}
   />
 
   <!-- Section 6: Three Ways to Build -->
   <TabbedDemo
-    sectionTitle="All the ways you work, in one place"
-    sectionCopy="Skip the handoffs between prompting, designing, and coding. Alodix unifies AI assistance, visual building, and code editing so you can turn ideas into software without breaking your flow."
+    sectionTitle="What you get"
+    sectionCopy="Complete, working software deployed on your infrastructure. Full source code. Documentation. Training if you need it."
     tabs={[
       {
         id: 'chat',
-        label: 'Chat',
-        headline: 'Go from conversation to working code',
-        copy: 'Describe what you need in plain language. Our AI understands Laravel and Filament, generating code that fits established patterns—not random snippets.',
+        label: 'Discovery',
+        headline: 'We learn your process',
+        copy: 'We start with a call to understand what you need. No generic demos. Real conversation about your specific requirements.',
       },
       {
         id: 'visual',
-        label: 'Visual Builder',
-        headline: 'Design interfaces without code',
-        copy: "Filament's admin panel gives you a powerful visual foundation. Customize layouts, forms, and dashboards with a builder designed for business applications.",
+        label: 'Build',
+        headline: 'We build it fast',
+        copy: 'Using Laravel and Filament, we build your application. You see progress weekly. Feedback loops are short.',
       },
       {
         id: 'code',
-        label: 'Code',
-        headline: 'Full access when you need it',
-        copy: "It's your code. Edit it directly in your IDE, version it with Git, deploy it how you want. No proprietary formats, no export limitations.",
+        label: 'Handover',
+        headline: 'You own everything',
+        copy: 'Full source code. Deployment docs. We train your team if needed. Ongoing support available.',
       },
     ]}
   />
 
   <!-- Section 7: Anti-Cloud Manifesto -->
   <ComparisonSection
-    headline="Why we don't do SaaS"
-    leftTitle="The SaaS Problem"
+    headline="SaaS vs. ownership"
+    leftTitle="Typical SaaS"
     leftItems={[
-      'Monthly fees that compound forever',
-      "Your data on someone else's servers",
-      "Features you don't need, missing ones you do",
-      'Vendor gets acquired, your software disappears',
-      'Export? Good luck with that proprietary format',
+      'Monthly fees forever',
+      'Your data on their servers',
+      'Features you pay for but never use',
+      'Vendor gets acquired, you scramble',
+      'Try exporting your data sometime',
     ]}
-    rightTitle="The Alodix Alternative"
+    rightTitle="What we do"
     rightItems={[
-      'One-time implementation, ongoing ownership',
-      'Your infrastructure, your rules',
-      'Built exactly for your needs, nothing more',
-      "You own the code—it's yours forever",
-      'Standard Laravel/PHP—any developer can work on it',
+      'One project fee, you own it',
+      'Runs on your infrastructure',
+      'Built for exactly what you need',
+      'Your code, forever',
+      'Standard Laravel—anyone can work on it',
     ]}
-    ctaText="Read our Anti-Cloud Manifesto"
-    ctaHref="/manifesto"
+    ctaText="Learn more"
+    ctaHref="/about-manifesto"
   />
 
   <!-- Section 8: Customer Results -->
   <StatsGrid
-    headline="Results from businesses who chose ownership"
+    headline="Numbers"
     stats={[
       {
-        value: '€240K',
-        label: 'saved over 3 years vs. SaaS alternatives',
-        company: 'Operations Firm',
+        value: '4-8',
+        label: 'weeks typical delivery',
+        company: '',
       },
       {
-        value: '4 weeks',
-        label: 'from first call to production',
-        company: 'Manufacturing Company',
+        value: '€15-50K',
+        label: 'typical project range',
+        company: '',
       },
       {
         value: '100%',
-        label: 'code ownership with full capability transfer',
-        company: 'Professional Services',
+        label: 'code ownership',
+        company: '',
       },
       {
         value: '€0',
-        label: 'monthly software fees',
-        company: 'Growing Startup',
+        label: 'monthly fees',
+        company: '',
       },
     ]}
   />
 
   <!-- Section 9: How We Work Together -->
   <ProcessSteps
-    headline="Implementation, not just software"
-    supportingMessage="We're not selling you software. We're building your capability."
+    headline="The process"
+    supportingMessage="Simple. Direct. No surprises."
     steps={[
       {
         number: '01',
-        title: 'Discover',
-        description: 'We understand your processes, data, and team. No generic demos—real conversations about what you need.',
+        title: 'Call',
+        description: 'We talk about what you need. 30 minutes. No pitch deck.',
       },
       {
         number: '02',
-        title: 'Build',
-        description: 'Our architects design and AI accelerates. You see progress weekly, provide feedback continuously.',
+        title: 'Proposal',
+        description: 'Fixed scope, fixed price. You know exactly what you get.',
       },
       {
         number: '03',
-        title: 'Own',
-        description: 'Deployed on your infrastructure. Full code handover. Training for your team. Ongoing support if you want it.',
+        title: 'Build',
+        description: 'We build it. Weekly updates. You give feedback.',
+      },
+      {
+        number: '04',
+        title: 'Deploy',
+        description: 'We deploy to your servers. Hand over the code. Done.',
       },
     ]}
   />
 
   <!-- Section 10: Blog Preview -->
   <BlogPreview
-    headline="Perspectives on ownership-first software"
+    headline="From our blog"
     posts={[
       {
-        title: 'Why vibe coding produces unmaintainable software',
-        href: '/blog/vibe-coding',
-        category: 'Engineering',
+        title: 'Why we build on Laravel',
+        href: '/blog/why-laravel',
+        category: 'Tech',
       },
       {
-        title: 'The true cost of SaaS over 5 years',
+        title: 'The real cost of SaaS',
         href: '/blog/saas-cost',
         category: 'Business',
       },
       {
-        title: 'Laravel + AI: How frameworks constrain chaos',
-        href: '/blog/laravel-ai',
-        category: 'Technology',
+        title: 'Code ownership matters',
+        href: '/blog/code-ownership',
+        category: 'Opinion',
       },
     ]}
   />
 
   <!-- Section 11: Final CTA -->
   <FinalCTA
-    headline="It's your turn to own"
-    subheadline="Stop renting software. Start building assets."
-    primaryCtaText="Book a Discovery Call"
-    primaryCtaHref="/demo"
-    secondaryCtaText="Explore on GitHub"
+    headline="Let's talk"
+    subheadline="30-minute call. No pitch. Just conversation."
+    primaryCtaText="Book a Call"
+    primaryCtaHref="/contact"
+    secondaryCtaText="See our code"
     secondaryCtaHref="https://github.com/alodix"
   />
 
