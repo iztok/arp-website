@@ -13,19 +13,21 @@ interface Props {
 }
 
 const {
-  eyebrow = 'OPEN SOURCE · Software you own, forever.',
+  eyebrow = 'We build it. You own it.',
   phrases = [
-    { useCase: 'CRM that tracks client relationships', infrastructure: 'own servers' },
-    { useCase: 'inventory system with real-time alerts', infrastructure: 'company database' },
-    { useCase: 'project tracker with AI insights', infrastructure: 'existing infrastructure' },
+    { useCase: 'CRM', infrastructure: 'your database' },
+    { useCase: 'Admin Panel', infrastructure: 'your servers' },
+    { useCase: 'Workflow System', infrastructure: 'your infrastructure' },
   ],
-  supportingText = 'Internal business software you actually own. Not another subscription. Not vendor lock-in. Your code, your servers, your data—forever.',
-  ctaText = 'Start Building',
-  ctaHref = '/start',
+  supportingText = 'We build custom business software and deploy it on your infrastructure. You get the source code. No subscriptions, no lock-in.',
+  ctaText = 'Book a Call',
+  ctaHref = '/contact',
 } = Astro.props;
 ---
 
-<section class="hero">
+<section class="hero noise-bg">
+  <div class="hero__gradient-orb hero__gradient-orb--1" aria-hidden="true"></div>
+  <div class="hero__gradient-orb hero__gradient-orb--2" aria-hidden="true"></div>
   <div class="hero__bg-lines" aria-hidden="true">
     {Array.from({ length: 8 }).map((_, i) => (
       <div class="hero__bg-line" />
@@ -36,14 +38,14 @@ const {
     <div class="hero__eyebrow">{eyebrow}</div>
 
     <h1 class="hero__headline">
-      <span class="hero__headline-static">Build me a </span>
-      <span class="hero__headline-dynamic">
+      <span class="hero__headline-line">
+        <span class="hero__headline-static">Your </span>
         <span class="hero__typewriter-usecase highlight" data-phrases={JSON.stringify(phrases.map(p => p.useCase))}>
           {phrases[0].useCase}
         </span>
       </span>
-      <span class="hero__headline-static"> using my </span>
-      <span class="hero__headline-dynamic">
+      <span class="hero__headline-line">
+        <span class="hero__headline-static">running on </span>
         <span class="hero__typewriter-infra highlight" data-phrases={JSON.stringify(phrases.map(p => p.infrastructure))}>
           {phrases[0].infrastructure}
         </span>
@@ -90,6 +92,31 @@ const {
     justify-content: center;
     padding: var(--spacing-32) var(--spacing-6) var(--spacing-24);
     overflow: hidden;
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  }
+
+  .hero__gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero__gradient-orb--1 {
+    top: 10%;
+    right: 15%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(238, 71, 35, 0.12) 0%, transparent 70%);
+  }
+
+  .hero__gradient-orb--2 {
+    bottom: 20%;
+    left: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0, 137, 153, 0.1) 0%, transparent 70%);
   }
 
   .hero__bg-lines {
@@ -102,7 +129,8 @@ const {
     flex-direction: column;
     justify-content: space-evenly;
     pointer-events: none;
-    opacity: 0.15;
+    opacity: 0.3;
+    z-index: 1;
   }
 
   .hero__bg-line {
@@ -139,28 +167,26 @@ const {
   }
 
   .hero__headline {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2.5rem, 6vw, 4rem);
     font-weight: var(--font-weight-light);
-    line-height: var(--line-height-snug);
+    line-height: 1.2;
     color: var(--color-text-primary);
     margin-bottom: var(--spacing-8);
+  }
+
+  .hero__headline-line {
+    display: block;
   }
 
   .hero__headline-static {
     color: var(--color-text-secondary);
   }
 
-  .hero__headline-dynamic {
-    display: inline;
-  }
-
   .hero__typewriter-usecase,
   .hero__typewriter-infra {
     color: var(--color-accent);
-    text-decoration: underline;
-    text-decoration-color: var(--color-accent);
-    text-underline-offset: 6px;
-    text-decoration-thickness: 2px;
+    border-bottom: 3px solid var(--color-accent);
+    padding-bottom: 2px;
   }
 
   .hero__supporting-text {
@@ -209,11 +235,16 @@ const {
     }
 
     .hero__headline {
-      font-size: 1.75rem;
+      font-size: clamp(1.75rem, 8vw, 2.5rem);
     }
 
     .hero__supporting-text {
       font-size: var(--font-size-base);
+    }
+
+    .hero__typewriter-usecase,
+    .hero__typewriter-infra {
+      border-bottom-width: 2px;
     }
   }
 </style>

@@ -11,7 +11,8 @@ interface Props {
 const { blok } = Astro.props;
 ---
 
-<section class="page-hero" {...storyblokEditable(blok)}>
+<section class="page-hero noise-bg" {...storyblokEditable(blok)}>
+  <div class="page-hero__gradient-orb" aria-hidden="true"></div>
   <div class="page-hero__container">
     {blok.headline && <h1 class="page-hero__headline">{blok.headline}</h1>}
     {blok.subheadline && <p class="page-hero__subheadline">{blok.subheadline}</p>}
@@ -22,12 +23,29 @@ const { blok } = Astro.props;
   .page-hero {
     padding: var(--spacing-32) var(--spacing-6) var(--spacing-16);
     text-align: center;
-    background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-hero__gradient-orb {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(238, 71, 35, 0.08) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
   }
 
   .page-hero__container {
     max-width: var(--max-width-narrow);
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
 
   .page-hero__headline {

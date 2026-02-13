@@ -46,8 +46,8 @@ const { blok } = Astro.props;
   .team-section__container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--spacing-6); }
   .team-section__headline { font-size: var(--font-size-4xl); font-weight: var(--font-weight-light); text-align: center; margin-bottom: var(--spacing-12); }
   .team-section__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-6); }
-  .team-section__card { background: var(--color-bg-secondary); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-6); text-align: center; transition: border-color var(--transition-fast); }
-  .team-section__card:hover { border-color: var(--color-border-light); }
+  .team-section__card { background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--spacing-6); text-align: center; transition: all var(--transition-base); box-shadow: var(--shadow-card); }
+  .team-section__card:hover { border-color: var(--color-border-light); box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
   .team-section__photo { width: 100px; height: 100px; margin: 0 auto var(--spacing-4); border-radius: 50%; overflow: hidden; background: var(--color-bg-tertiary); }
   .team-section__photo img { width: 100%; height: 100%; object-fit: cover; }
   .team-section__photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); }
