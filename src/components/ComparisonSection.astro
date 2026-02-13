@@ -5,30 +5,28 @@ interface Props {
   leftItems?: string[];
   rightTitle?: string;
   rightItems?: string[];
-  ctaText?: string;
-  ctaHref?: string;
 }
 
 const {
-  headline = "Why we don't do SaaS",
-  leftTitle = 'The SaaS Problem',
+  headline = 'The real comparison',
+  leftTitle = 'Typical SaaS',
   leftItems = [
     'Monthly fees that compound forever',
-    "Your data on someone else's servers",
-    "Features you don't need, missing ones you do",
-    'Vendor gets acquired, your software disappears',
-    'Export? Good luck with that proprietary format',
+    'Your data on their servers, in their jurisdiction',
+    'Features driven by their roadmap, not yours',
+    'Vendor gets acquired, you scramble',
+    'Try exporting your data sometime',
+    'GDPR compliance? "Trust us"',
   ],
-  rightTitle = 'The Alodix Alternative',
+  rightTitle = 'Alodix',
   rightItems = [
-    'One-time implementation, ongoing ownership',
-    'Your infrastructure, your rules',
-    'Built exactly for your needs, nothing more',
-    "You own the code—it's yours forever",
-    'Standard Laravel/PHP—any developer can work on it',
+    'One project fee, you own it forever',
+    'Runs on your infrastructure, in your jurisdiction',
+    'Built for exactly what you need',
+    'Your code survives anything — even us',
+    'Full software and data sovereignty',
+    'Compliance built in, not bolted on',
   ],
-  ctaText = 'Read our Anti-Cloud Manifesto',
-  ctaHref = '/manifesto',
 } = Astro.props;
 ---
 
@@ -66,16 +64,6 @@ const {
         </ul>
       </div>
     </div>
-
-    <div class="comparison__cta">
-      <a href={ctaHref} class="comparison__cta-link">
-        {ctaText}
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-          <line x1="5" y1="12" x2="19" y2="12"/>
-          <polyline points="12 5 19 12 12 19"/>
-        </svg>
-      </a>
-    </div>
   </div>
 </section>
 
@@ -102,7 +90,6 @@ const {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-8);
-    margin-bottom: var(--spacing-12);
   }
 
   .comparison__column {
@@ -117,7 +104,8 @@ const {
   }
 
   .comparison__column--right {
-    border-color: rgba(94, 234, 212, 0.3);
+    border-color: rgba(238, 71, 35, 0.3);
+    background: var(--color-bg-card);
   }
 
   .comparison__column-title {
@@ -167,29 +155,13 @@ const {
     color: var(--color-accent);
   }
 
-  .comparison__cta {
-    text-align: center;
-  }
-
-  .comparison__cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-medium);
-    color: var(--color-accent);
-    text-decoration: none;
-    transition: gap var(--transition-fast);
-  }
-
-  .comparison__cta-link:hover {
-    gap: var(--spacing-3);
-    color: var(--color-accent);
-  }
-
   @media (max-width: 768px) {
     .comparison__columns {
       grid-template-columns: 1fr;
+    }
+
+    .comparison__headline {
+      font-size: var(--font-size-3xl);
     }
   }
 </style>

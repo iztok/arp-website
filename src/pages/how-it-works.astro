@@ -1,0 +1,512 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="How It Works - Alodix"
+  description="From your requirements to your infrastructure. Fully owned. Every Alodix project follows three phases: Discover, Build, Own."
+>
+  <Header />
+
+  <!-- Hero -->
+  <section class="hiw-hero">
+    <div class="hiw-hero__container">
+      <div class="hiw-hero__content">
+        <span class="hiw-hero__eyebrow">HOW IT WORKS</span>
+        <h1 class="hiw-hero__headline">From your requirements to your infrastructure. Fully owned.</h1>
+        <p class="hiw-hero__subhead">Every Alodix project follows three phases: Discover, Build, Own. The process is designed to be fast, predictable, and transparent — with you in control at every step.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 1: Discover -->
+  <section class="hiw-phase hiw-phase--discover">
+    <div class="hiw-phase__container">
+      <div class="hiw-phase__content">
+        <span class="hiw-phase__number">01</span>
+        <h2 class="hiw-phase__headline">We learn how your business actually works</h2>
+        <p class="hiw-phase__body">This isn't a product demo. It's a conversation. We dig into your workflows, your pain points, your existing systems, and the specific problems you need solved.</p>
+        <p class="hiw-phase__body">We ask the questions software vendors don't: How does your team actually use the tools they have? Where do workarounds live? What breaks when you scale? What data do you wish you could see but can't?</p>
+        <p class="hiw-phase__body">By the end of discovery, you get a detailed proposal — fixed scope, fixed price, no surprises.</p>
+      </div>
+      <div class="hiw-phase__sidebar">
+        <h3 class="hiw-phase__sidebar-title">What to expect</h3>
+        <ul class="hiw-phase__sidebar-list">
+          <li><strong>Duration:</strong> 1-2 weeks</li>
+          <li><strong>Format:</strong> Calls + async review</li>
+          <li><strong>Deliverable:</strong> Scope document + fixed-price proposal</li>
+          <li><strong>Your role:</strong> Share your business knowledge. We handle the rest.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 2: Build -->
+  <section class="hiw-phase hiw-phase--build hiw-phase--reversed">
+    <div class="hiw-phase__container hiw-phase__container--reversed">
+      <div class="hiw-phase__sidebar">
+        <h3 class="hiw-phase__sidebar-title">What to expect</h3>
+        <ul class="hiw-phase__sidebar-list">
+          <li><strong>Duration:</strong> 4-8 weeks (typical)</li>
+          <li><strong>Format:</strong> Weekly demos + continuous feedback</li>
+          <li><strong>Your role:</strong> Review weekly progress. Give honest feedback.</li>
+          <li><strong>Our team:</strong> Dedicated architect + developers from our 70+ person team</li>
+        </ul>
+      </div>
+      <div class="hiw-phase__content">
+        <span class="hiw-phase__number">02</span>
+        <h2 class="hiw-phase__headline">We build it. You watch it happen.</h2>
+        <p class="hiw-phase__body">Our team designs the architecture and builds your system using pre-built panels customized to your requirements. AI accelerates the development. Senior engineers review everything.</p>
+        <p class="hiw-phase__body">You see real progress every week. Not slide decks — working software. Feedback loops are short. If something isn't right, we adjust immediately.</p>
+        <p class="hiw-phase__body">The codebase follows the standards of one of the most widely used open-source frameworks in the world. Clean, documented, maintainable. Any qualified developer can read it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Phase 3: Own -->
+  <section class="hiw-phase hiw-phase--own">
+    <div class="hiw-phase__container">
+      <div class="hiw-phase__content">
+        <span class="hiw-phase__number">03</span>
+        <h2 class="hiw-phase__headline">It's yours. Completely.</h2>
+        <p class="hiw-phase__body">We deploy the system on your infrastructure — your cloud, your data center, your choice. You receive the complete source code, deployment documentation, and technical handover.</p>
+        <p class="hiw-phase__body">If your team needs training, we provide it. If you want ongoing support, we offer it. But here's the point: you never need us again. Your software runs independently. Your team or any developer can modify it. You own every line of code and every byte of data.</p>
+        <p class="hiw-phase__body">We succeed when you don't need us anymore. That's the goal.</p>
+      </div>
+      <div class="hiw-phase__sidebar">
+        <h3 class="hiw-phase__sidebar-title">What you receive</h3>
+        <ul class="hiw-phase__sidebar-list">
+          <li>Complete source code (no proprietary dependencies)</li>
+          <li>Deployed on your infrastructure</li>
+          <li>Technical documentation</li>
+          <li>Team training and capability transfer</li>
+          <li>Optional: ongoing support agreement</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Your Role vs Our Role -->
+  <section class="hiw-roles">
+    <div class="hiw-roles__container">
+      <h2 class="hiw-roles__headline">Clear responsibilities. No confusion.</h2>
+
+      <div class="hiw-roles__columns">
+        <div class="hiw-roles__column">
+          <h3 class="hiw-roles__column-title">What we handle</h3>
+          <ul class="hiw-roles__list">
+            <li>Architecture and system design</li>
+            <li>Development and AI integration</li>
+            <li>Security review and testing</li>
+            <li>Deployment and infrastructure setup</li>
+            <li>Documentation and training</li>
+          </ul>
+        </div>
+
+        <div class="hiw-roles__column">
+          <h3 class="hiw-roles__column-title">What you provide</h3>
+          <ul class="hiw-roles__list">
+            <li>Business knowledge and requirements</li>
+            <li>Weekly feedback on demos</li>
+            <li>Access to stakeholders for discovery</li>
+            <li>Infrastructure (your servers, your cloud, your choice)</li>
+            <li>Decisions on priorities and scope</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Stack -->
+  <section class="hiw-stack">
+    <div class="hiw-stack__container">
+      <h2 class="hiw-stack__headline">Built on technology your developers already know</h2>
+      <p class="hiw-stack__body">Alodix is built on one of the most popular and battle-tested open-source frameworks in the world, with millions of developers and a massive ecosystem. This isn't experimental technology — it's the foundation that thousands of production applications run on every day.</p>
+      <p class="hiw-stack__body">The admin panel framework we use is equally proven — purpose-built for business applications, with a thriving open-source community and rapid development cycles.</p>
+      <p class="hiw-stack__body">Your system runs on standard technology. Any competent developer can understand, maintain, and extend it.</p>
+
+      <div class="hiw-stack__tech">
+        <span class="hiw-stack__tech-item">Laravel</span>
+        <span class="hiw-stack__tech-item">Filament</span>
+        <span class="hiw-stack__tech-item">PHP</span>
+        <span class="hiw-stack__tech-item">MySQL / PostgreSQL</span>
+        <span class="hiw-stack__tech-item">AWS, Azure, DigitalOcean, on-prem</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="hiw-faq">
+    <div class="hiw-faq__container">
+      <h2 class="hiw-faq__headline">Frequently asked questions</h2>
+
+      <div class="hiw-faq__list">
+        <details class="hiw-faq__item">
+          <summary class="hiw-faq__question">How much does it cost?</summary>
+          <p class="hiw-faq__answer">Every project is different depending on which panels you need and how much customization is required. Typical projects range from €15,000 to €50,000. You get a fixed-price proposal before any work begins — no surprises.</p>
+        </details>
+
+        <details class="hiw-faq__item">
+          <summary class="hiw-faq__question">How long does it take?</summary>
+          <p class="hiw-faq__answer">Most projects go from first call to production in 4-8 weeks. Discovery takes 1-2 weeks, and the build phase typically takes 3-6 weeks depending on complexity.</p>
+        </details>
+
+        <details class="hiw-faq__item">
+          <summary class="hiw-faq__question">Do I really own the code?</summary>
+          <p class="hiw-faq__answer">Yes. Completely. You receive the full source code with no proprietary dependencies. You can modify it, extend it, or hire any developer to work on it. There are no licensing restrictions or ongoing fees.</p>
+        </details>
+
+        <details class="hiw-faq__item">
+          <summary class="hiw-faq__question">What if I need changes after delivery?</summary>
+          <p class="hiw-faq__answer">You have the full source code, so your team or any developer can make changes. We also offer ongoing support agreements if you prefer us to handle modifications and maintenance.</p>
+        </details>
+
+        <details class="hiw-faq__item">
+          <summary class="hiw-faq__question">Where is my data stored?</summary>
+          <p class="hiw-faq__answer">On your infrastructure. You choose where to deploy — your own servers, your preferred cloud provider, or on-premises. Your data never touches our servers.</p>
+        </details>
+
+        <details class="hiw-faq__item">
+          <summary class="hiw-faq__question">What technology do you use?</summary>
+          <p class="hiw-faq__answer">Laravel (PHP) for the backend, Filament for the admin panel framework, and MySQL or PostgreSQL for the database. These are industry-standard, widely-used technologies with massive developer communities.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <FinalCTA
+    headline="Ready to own your software?"
+    subheadline="30-minute call. No pitch deck. Just a real conversation about what you need."
+    primaryCtaText="Book a Discovery Call"
+    primaryCtaHref="/contact"
+    secondaryCtaText="Explore on GitHub"
+    secondaryCtaHref="https://github.com/alodix"
+  />
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hiw-hero {
+    padding: var(--spacing-32) 0 var(--spacing-24);
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  }
+
+  .hiw-hero__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .hiw-hero__content {
+    max-width: 700px;
+  }
+
+  .hiw-hero__eyebrow {
+    display: inline-block;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .hiw-hero__headline {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-tight);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .hiw-hero__subhead {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Phases */
+  .hiw-phase {
+    padding: var(--spacing-24) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hiw-phase--build {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .hiw-phase__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-16);
+    align-items: start;
+  }
+
+  .hiw-phase__container--reversed {
+    grid-template-columns: 1fr 1.5fr;
+  }
+
+  .hiw-phase__number {
+    display: inline-block;
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    color: var(--color-accent);
+    opacity: 0.5;
+    margin-bottom: var(--spacing-4);
+  }
+
+  .hiw-phase__headline {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-light);
+    line-height: var(--line-height-snug);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .hiw-phase__body {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .hiw-phase__sidebar {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    position: sticky;
+    top: 100px;
+  }
+
+  .hiw-phase__sidebar-title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin-bottom: var(--spacing-6);
+  }
+
+  .hiw-phase__sidebar-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .hiw-phase__sidebar-list strong {
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* Roles */
+  .hiw-roles {
+    padding: var(--spacing-24) 0;
+  }
+
+  .hiw-roles__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .hiw-roles__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    text-align: center;
+    margin-bottom: var(--spacing-16);
+  }
+
+  .hiw-roles__columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-8);
+  }
+
+  .hiw-roles__column {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+  }
+
+  .hiw-roles__column-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-6);
+    padding-bottom: var(--spacing-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .hiw-roles__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .hiw-roles__list li::before {
+    content: '—';
+    margin-right: var(--spacing-2);
+    color: var(--color-accent);
+  }
+
+  /* Stack */
+  .hiw-stack {
+    padding: var(--spacing-24) 0;
+    background-color: var(--color-bg-secondary);
+  }
+
+  .hiw-stack__container {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    text-align: center;
+  }
+
+  .hiw-stack__headline {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-light);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .hiw-stack__body {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .hiw-stack__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+    justify-content: center;
+    margin-top: var(--spacing-8);
+  }
+
+  .hiw-stack__tech-item {
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+  }
+
+  /* FAQ */
+  .hiw-faq {
+    padding: var(--spacing-24) 0;
+  }
+
+  .hiw-faq__container {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .hiw-faq__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    text-align: center;
+    margin-bottom: var(--spacing-12);
+  }
+
+  .hiw-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .hiw-faq__item {
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--spacing-6) 0;
+  }
+
+  .hiw-faq__item:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .hiw-faq__question {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hiw-faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .hiw-faq__question::after {
+    content: '+';
+    font-size: var(--font-size-xl);
+    color: var(--color-text-muted);
+    transition: transform var(--transition-fast);
+  }
+
+  .hiw-faq__item[open] .hiw-faq__question::after {
+    content: '-';
+  }
+
+  .hiw-faq__answer {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-top: var(--spacing-4);
+    padding-right: var(--spacing-8);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hiw-phase__container,
+    .hiw-phase__container--reversed {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-8);
+    }
+
+    .hiw-phase__sidebar {
+      position: static;
+    }
+
+    .hiw-roles__columns {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hiw-hero {
+      padding: var(--spacing-24) 0 var(--spacing-16);
+    }
+
+    .hiw-hero__headline {
+      font-size: var(--font-size-3xl);
+    }
+
+    .hiw-phase__headline {
+      font-size: var(--font-size-2xl);
+    }
+
+    .hiw-roles__headline,
+    .hiw-faq__headline {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+interface Principle {
+  title: string;
+  copy: string;
+}
+
+interface Props {
+  headline?: string;
+  principles?: Principle[];
+}
+
+const {
+  headline = 'What we believe',
+  principles = [
+    {
+      title: 'Software is an asset, not an expense.',
+      copy: 'When you own your software, every improvement increases the value of something you own. SaaS subscriptions are pure cost.',
+    },
+    {
+      title: 'Data sovereignty is a business requirement.',
+      copy: "Knowing where your data lives, who can access it, and what laws govern it isn't paranoia — it's due diligence.",
+    },
+    {
+      title: 'AI should accelerate, not replace, good engineering.',
+      copy: 'We use AI to build faster. We use proven frameworks to build better. Nothing reaches your customers without human approval.',
+    },
+    {
+      title: 'Open source prevents lock-in.',
+      copy: "When the framework is open, you're never trapped. Any developer can work on your system. Forever.",
+    },
+    {
+      title: 'Capability transfer is as important as delivery.',
+      copy: "We succeed when you don't need us anymore. That's the goal.",
+    },
+    {
+      title: "The best software fits your business — not the other way around.",
+      copy: "You shouldn't reorganize your processes to match your software's limitations.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="beliefs">
+  <div class="beliefs__container">
+    <h2 class="beliefs__headline">{headline}</h2>
+
+    <div class="beliefs__grid">
+      {principles.map((principle, index) => (
+        <div class="beliefs__card">
+          <span class="beliefs__number">{index + 1}.</span>
+          <h3 class="beliefs__card-title">{principle.title}</h3>
+          <p class="beliefs__card-copy">{principle.copy}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .beliefs {
+    padding: var(--spacing-24) 0;
+    background: linear-gradient(135deg, rgba(238, 71, 35, 0.02) 0%, rgba(0, 137, 153, 0.02) 100%);
+  }
+
+  .beliefs__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .beliefs__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    text-align: center;
+    margin-bottom: var(--spacing-16);
+  }
+
+  .beliefs__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-8);
+  }
+
+  .beliefs__card {
+    padding: var(--spacing-6);
+  }
+
+  .beliefs__number {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: var(--spacing-2);
+  }
+
+  .beliefs__card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-3);
+    line-height: var(--line-height-snug);
+  }
+
+  .beliefs__card-copy {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (max-width: 768px) {
+    .beliefs__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .beliefs__headline {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>

@@ -3,32 +3,34 @@ interface Step {
   number: string;
   title: string;
   description: string;
+  detail: string;
 }
 
 interface Props {
   headline?: string;
-  supportingMessage?: string;
   steps?: Step[];
 }
 
 const {
-  headline = 'Implementation, not just software',
-  supportingMessage = "We're not selling you software. We're building your capability.",
+  headline = 'From conversation to ownership in three steps',
   steps = [
     {
       number: '01',
       title: 'Discover',
-      description: 'We understand your processes, data, and team. No generic demos—real conversations about what you need.',
+      description: 'We start with a real conversation about your specific requirements. No generic demos, no product tours. We want to understand how your business actually works — then we show you exactly how we\'d build it.',
+      detail: '30-minute call. No pitch deck.',
     },
     {
       number: '02',
       title: 'Build',
-      description: 'Our architects design and AI accelerates. You see progress weekly, provide feedback continuously.',
+      description: 'Our 70+ person team designs the architecture and builds your system. AI accelerates development within proven patterns. You see progress weekly and provide feedback continuously.',
+      detail: '4-8 weeks typical delivery. Fixed scope, fixed price.',
     },
     {
       number: '03',
       title: 'Own',
-      description: 'Deployed on your infrastructure. Full code handover. Training for your team. Ongoing support if you want it.',
+      description: 'Deployed on your infrastructure. Full code handover. Training for your team. Ongoing support if you want it — but you\'ll never need our permission to change anything.',
+      detail: '100% code ownership. Zero monthly fees.',
     },
   ],
 } = Astro.props;
@@ -45,6 +47,7 @@ const {
           <div class="process-steps__step-content">
             <h3 class="process-steps__step-title">{step.title}</h3>
             <p class="process-steps__step-description">{step.description}</p>
+            <p class="process-steps__step-detail">{step.detail}</p>
           </div>
           {index < steps.length - 1 && (
             <div class="process-steps__connector">
@@ -57,8 +60,6 @@ const {
         </div>
       ))}
     </div>
-
-    <p class="process-steps__message">{supportingMessage}</p>
   </div>
 </section>
 
@@ -85,7 +86,6 @@ const {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--spacing-8);
-    margin-bottom: var(--spacing-12);
   }
 
   .process-steps__step {
@@ -115,6 +115,15 @@ const {
     font-size: var(--font-size-sm);
     color: var(--color-text-secondary);
     line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .process-steps__step-detail {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   .process-steps__connector {
@@ -128,23 +137,22 @@ const {
     z-index: 1;
   }
 
-  .process-steps__message {
-    text-align: center;
-    font-size: var(--font-size-lg);
-    font-style: italic;
-    color: var(--color-text-secondary);
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
   @media (max-width: 1024px) {
     .process-steps__steps {
       grid-template-columns: 1fr;
       gap: var(--spacing-4);
+      max-width: 600px;
+      margin: 0 auto;
     }
 
     .process-steps__connector {
       display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .process-steps__headline {
+      font-size: var(--font-size-3xl);
     }
   }
 </style>

@@ -1,0 +1,109 @@
+---
+interface ProblemCard {
+  title: string;
+  copy: string;
+}
+
+interface Props {
+  headline?: string;
+  cards?: ProblemCard[];
+}
+
+const {
+  headline = "You're renting your own business",
+  cards = [
+    {
+      title: 'The SaaS Trap',
+      copy: "Monthly fees that compound forever. Your data on someone else's servers, in someone else's jurisdiction. Features driven by their investors, not your needs. When they raise prices, you pay. When they get acquired, you scramble.",
+    },
+    {
+      title: 'The Low-Code Mirage',
+      copy: "More customization than SaaS, but you've just traded one landlord for another. Your apps can't run anywhere else. Per-seat pricing returns. And your business data still flows through their infrastructure.",
+    },
+    {
+      title: 'The Vibe Coding Gamble',
+      copy: "AI can generate software fast. But speed without structure creates chaos. No architecture, no security audit, no one who understands what was built. Six months later, you're rewriting everything.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="problem-cards">
+  <div class="problem-cards__container">
+    <h2 class="problem-cards__headline">{headline}</h2>
+
+    <div class="problem-cards__grid">
+      {cards.map((card) => (
+        <div class="problem-cards__card">
+          <h3 class="problem-cards__card-title">{card.title}</h3>
+          <p class="problem-cards__card-copy">{card.copy}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem-cards {
+    padding: var(--spacing-24) 0;
+  }
+
+  .problem-cards__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+  }
+
+  .problem-cards__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    text-align: center;
+    margin-bottom: var(--spacing-16);
+  }
+
+  .problem-cards__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+  }
+
+  .problem-cards__card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    transition: all var(--transition-base);
+  }
+
+  .problem-cards__card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .problem-cards__card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .problem-cards__card-copy {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (max-width: 1024px) {
+    .problem-cards__grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .problem-cards__headline {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>

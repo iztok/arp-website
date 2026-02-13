@@ -1,0 +1,145 @@
+---
+interface SovereigntyCard {
+  title: string;
+  copy: string;
+}
+
+interface Props {
+  headline?: string;
+  body?: string;
+  cards?: SovereigntyCard[];
+}
+
+const {
+  headline = 'The Sovereignty Advantage',
+  body = "For European companies, software sovereignty isn't a philosophy — it's a business requirement. When your customer data lives on a foreign cloud provider's servers, governed by foreign laws, accessible to foreign authorities, you're not just paying rent — you're taking on regulatory risk.\n\nAlodix systems run on your infrastructure, in your jurisdiction, under your control. Your business logic, your customer data, your competitive advantage — all of it stays exactly where it belongs.",
+  cards = [
+    {
+      title: 'Data Sovereignty',
+      copy: 'Your data on your servers. Your jurisdiction. Your rules.',
+    },
+    {
+      title: 'Code Sovereignty',
+      copy: 'Full source code ownership. No proprietary dependencies.',
+    },
+    {
+      title: 'Infrastructure Sovereignty',
+      copy: 'Deploy anywhere — your cloud, your data center, your terms.',
+    },
+    {
+      title: 'Operational Sovereignty',
+      copy: 'No vendor lock-in. No permission needed. Full autonomy.',
+    },
+  ],
+} = Astro.props;
+
+const bodyParagraphs = body.split('\n\n');
+---
+
+<section class="sovereignty">
+  <div class="sovereignty__container">
+    <h2 class="sovereignty__headline">{headline}</h2>
+
+    <div class="sovereignty__body">
+      {bodyParagraphs.map((paragraph) => (
+        <p class="sovereignty__body-text">{paragraph}</p>
+      ))}
+    </div>
+
+    <div class="sovereignty__grid">
+      {cards.map((card) => (
+        <div class="sovereignty__card">
+          <h3 class="sovereignty__card-title">{card.title}</h3>
+          <p class="sovereignty__card-copy">{card.copy}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .sovereignty {
+    padding: var(--spacing-24) 0;
+    background-color: var(--color-black-petrol);
+    color: #FFFFFF;
+  }
+
+  .sovereignty__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    text-align: center;
+  }
+
+  .sovereignty__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    color: #FFFFFF;
+    margin-bottom: var(--spacing-8);
+  }
+
+  .sovereignty__body {
+    max-width: 700px;
+    margin: 0 auto var(--spacing-16);
+  }
+
+  .sovereignty__body-text {
+    font-size: var(--font-size-base);
+    color: rgba(255, 255, 255, 0.8);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .sovereignty__body-text:last-child {
+    margin-bottom: 0;
+  }
+
+  .sovereignty__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-6);
+  }
+
+  .sovereignty__card {
+    padding: var(--spacing-6);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    text-align: left;
+    transition: all var(--transition-fast);
+  }
+
+  .sovereignty__card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .sovereignty__card-title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: #FFFFFF;
+    margin-bottom: var(--spacing-3);
+  }
+
+  .sovereignty__card-copy {
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.65);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (max-width: 1024px) {
+    .sovereignty__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .sovereignty__headline {
+      font-size: var(--font-size-3xl);
+    }
+
+    .sovereignty__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

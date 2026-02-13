@@ -1,0 +1,77 @@
+---
+interface Props {
+  stats?: string[];
+}
+
+const {
+  stats = [
+    '12 years in business',
+    '500+ projects delivered',
+    '70+ engineers',
+    'Ljubljana, Slovenia',
+  ],
+} = Astro.props;
+---
+
+<section class="trust-bar">
+  <div class="trust-bar__container">
+    {stats.map((stat, index) => (
+      <span class="trust-bar__stat">
+        {stat === 'Ljubljana, Slovenia' ? (
+          <Fragment>{stat} <span class="trust-bar__flag" aria-label="Slovenian flag">&#x1F1F8;&#x1F1EE;</span></Fragment>
+        ) : (
+          stat
+        )}
+        {index < stats.length - 1 && <span class="trust-bar__separator" aria-hidden="true">&middot;</span>}
+      </span>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    padding: var(--spacing-6) 0;
+    background-color: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .trust-bar__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+  }
+
+  .trust-bar__stat {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-2);
+  }
+
+  .trust-bar__separator {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+  }
+
+  .trust-bar__flag {
+    font-size: var(--font-size-base);
+  }
+
+  @media (max-width: 640px) {
+    .trust-bar__container {
+      flex-direction: column;
+      gap: var(--spacing-1);
+    }
+
+    .trust-bar__separator {
+      display: none;
+    }
+  }
+</style>
