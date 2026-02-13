@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { industries } from '../../data/use-cases';
+
+const iconPaths: Record<string, string> = {
+  briefcase: '<path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  code: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+  factory: '<path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/>',
+  heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+  chart: '<line x1="12" x2="12" y1="20" y2="10"/><line x1="18" x2="18" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="16"/>',
+  shopping: '<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" x2="21" y1="6" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+  building: '<rect width="16" height="20" x="4" y="2" rx="2" ry="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01"/><path d="M16 6h.01"/><path d="M12 6h.01"/><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/>',
+  hardhat: '<path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a6 6 0 0 1 6-6h0"/><path d="M14 6h0a6 6 0 0 1 6 6v3"/>',
+  truck: '<path d="M5 18H3c-.6 0-1-.4-1-1V7c0-.6.4-1 1-1h10c.6 0 1 .4 1 1v11"/><path d="M14 9h4l4 4v4c0 .6-.4 1-1 1h-2"/><circle cx="7" cy="18" r="2"/><path d="M15 18H9"/><circle cx="17" cy="18" r="2"/>',
+  graduation: '<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
+  bed: '<path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>',
+  megaphone: '<path d="m3 11 18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+};
+---
+
+<BaseLayout
+  title="Use Cases - Alodix"
+  description="Find the right software solution for your industry. Custom business software for professional services, manufacturing, healthcare, and more."
+>
+  <Header transparent={false} />
+
+  <section class="use-cases-hero">
+    <div class="use-cases-hero__container">
+      <span class="use-cases-hero__eyebrow">Find Your Fit</span>
+      <h1 class="use-cases-hero__headline">Every business is different.<br/>Your software should be too.</h1>
+      <p class="use-cases-hero__subhead">Select your industry to see which panels we can build for you—and how you'll own every line of code.</p>
+    </div>
+  </section>
+
+  <section class="industry-grid">
+    <div class="industry-grid__container">
+      <div class="industry-grid__grid">
+        {industries.map((industry) => (
+          <a href={`/use-cases/${industry.businessTypes[0].slug}`} class="industry-card" data-industry={industry.slug}>
+            <div class="industry-card__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={iconPaths[industry.icon] || iconPaths.briefcase} />
+            </div>
+            <span class="industry-card__label">{industry.name}</span>
+            <span class="industry-card__count">{industry.businessTypes.length} {industry.businessTypes.length === 1 ? 'type' : 'types'}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="use-cases-cta">
+    <div class="use-cases-cta__container">
+      <h2 class="use-cases-cta__headline">Don't see your industry?</h2>
+      <p class="use-cases-cta__text">We build custom software for any business. If it runs on data, we can build it.</p>
+      <a href="/contact" class="btn btn--primary">Book a Call</a>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  .use-cases-hero {
+    padding: var(--spacing-32) var(--spacing-6) var(--spacing-16);
+    background: linear-gradient(180deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    text-align: center;
+  }
+
+  .use-cases-hero__container {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+  }
+
+  .use-cases-hero__eyebrow {
+    display: inline-block;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .use-cases-hero__headline {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: var(--font-weight-light);
+    line-height: 1.2;
+    margin-bottom: var(--spacing-6);
+  }
+
+  .use-cases-hero__subhead {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .industry-grid {
+    padding: var(--spacing-16) var(--spacing-6);
+  }
+
+  .industry-grid__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .industry-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-4);
+  }
+
+  .industry-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-6);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    text-align: center;
+  }
+
+  .industry-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .industry-card__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-3);
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+  }
+
+  .industry-card:hover .industry-card__icon {
+    color: var(--color-accent);
+  }
+
+  .industry-card__icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .industry-card__label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-1);
+  }
+
+  .industry-card__count {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+  }
+
+  .use-cases-cta {
+    padding: var(--spacing-16) var(--spacing-6);
+    background: var(--color-bg-secondary);
+    text-align: center;
+  }
+
+  .use-cases-cta__container {
+    max-width: var(--max-width-narrow);
+    margin: 0 auto;
+  }
+
+  .use-cases-cta__headline {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-3);
+  }
+
+  .use-cases-cta__text {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-6);
+  }
+
+  @media (max-width: 1024px) {
+    .industry-grid__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .industry-grid__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .industry-grid__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
