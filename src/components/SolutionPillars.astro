@@ -1,0 +1,157 @@
+---
+interface Pillar {
+  icon: string;
+  title: string;
+  copy: string;
+}
+
+interface Props {
+  headline?: string;
+  subhead?: string;
+  pillars?: Pillar[];
+}
+
+const {
+  headline = 'Own your software. Own your data. Own your future.',
+  subhead = 'ARPforge builds internal business applications with complete software and data sovereignty. We build it. You own it. That\'s the deal.',
+  pillars = [
+    {
+      icon: 'ownership',
+      title: 'Full Ownership',
+      copy: 'You pay for the development, you own all the code and data. Not "sort of" yours, not "you can export your data." Actually, legally, completely yours. Deploy on your infrastructure, modify with any developer, keep forever.',
+    },
+    {
+      icon: 'sovereignty',
+      title: 'Software & Data Sovereignty',
+      copy: 'Your business logic stays on your servers, in your jurisdiction. No dependency on foreign cloud providers. No questions about where your data lives or who can access it. Full compliance with European data sovereignty requirements.',
+    },
+    {
+      icon: 'ai',
+      title: 'AI That Answers to You',
+      copy: 'Built-in AI agents that operate within your defined business rules. They assist your team, draft responses, triage requests — but nothing reaches your customers without human approval. Your rules, your guardrails.',
+    },
+  ],
+} = Astro.props;
+
+const iconMap: Record<string, string> = {
+  ownership: '<path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>',
+  sovereignty: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  ai: '<path d="M12 2L9 9L2 12L9 15L12 22L15 15L22 12L15 9L12 2Z"/>',
+};
+---
+
+<section class="solution-pillars">
+  <div class="solution-pillars__container">
+    <h2 class="solution-pillars__headline">{headline}</h2>
+    <p class="solution-pillars__subhead">{subhead}</p>
+
+    <div class="solution-pillars__grid">
+      {pillars.map((pillar) => (
+        <div class="solution-pillars__card">
+          <div class="solution-pillars__icon">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              set:html={iconMap[pillar.icon] || iconMap.ownership}
+            />
+          </div>
+          <h3 class="solution-pillars__card-title">{pillar.title}</h3>
+          <p class="solution-pillars__card-copy">{pillar.copy}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .solution-pillars {
+    padding: var(--spacing-24) 0;
+    background: linear-gradient(135deg, rgba(238, 71, 35, 0.03) 0%, rgba(0, 137, 153, 0.03) 100%);
+  }
+
+  .solution-pillars__container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+    text-align: center;
+  }
+
+  .solution-pillars__headline {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-light);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .solution-pillars__subhead {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto var(--spacing-16);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .solution-pillars__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-6);
+  }
+
+  .solution-pillars__card {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-8);
+    text-align: left;
+    transition: all var(--transition-base);
+  }
+
+  .solution-pillars__card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .solution-pillars__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-4);
+    color: var(--color-accent);
+  }
+
+  .solution-pillars__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .solution-pillars__card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .solution-pillars__card-copy {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  @media (max-width: 1024px) {
+    .solution-pillars__grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .solution-pillars__headline {
+      font-size: var(--font-size-3xl);
+    }
+  }
+</style>
